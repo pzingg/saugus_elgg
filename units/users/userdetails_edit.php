@@ -1,6 +1,7 @@
 <?php
 
     global $page_owner;
+    global $CFG;
     
     if (run("users:type:get",$page_owner) == 'person' && run("permissions:check",array("userdetails:change", $page_owner))) {
     
@@ -91,7 +92,7 @@ END;
         $emailReplies = gettext("Make comments public");
         $emailRules = gettext("Set this to 'yes' if you would like anyone to be able to comment on your resources (by default only logged-in users can). Note that this may make you vulnerable to spam.");
         
-        $body .= <<< END
+        if ($CFG->public_comments) $body .= <<< END
         
         <h2>$emailReplies</h2>
         <p>
@@ -100,6 +101,7 @@ END;
         
 END;
 
+    if ($CFG->public_comments) {
     $emailreplies = run("users:flags:get",array("publiccomments",$page_owner));
     if ($emailreplies) {
         $body .= templates_draw(array(
@@ -115,6 +117,7 @@ END;
             'column1' => "<label><input type=\"radio\" name=\"publiccomments\" value=\"yes\" /> " . gettext("Yes") . "</label> <label><input type=\"radio\" name=\"publiccomments\" value=\"no\" checked=\"checked\" /> " . gettext("No") . "</label>"
         )
         );
+    }
     }
         
         $emailReplies = gettext("Receive email messages");
