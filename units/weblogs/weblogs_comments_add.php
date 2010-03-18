@@ -5,6 +5,7 @@
         $post = $parameter;
         
         $addComment = gettext("Add a comment"); // gettext variable
+        $accessRes = gettext("Comment visibility:"); // gettext variable
         $run_result .= <<< END
         
     <form action="" method="post">
@@ -26,7 +27,7 @@ END;
         <input type="hidden" name="owner" value="{$userid}" />
         
 END;
-
+        
         $run_result .= templates_draw(array(
         
                                 'context' => 'databox1',
@@ -50,6 +51,16 @@ END;
         
                             )
                             );
+                            
+        $run_result .= templates_draw(array(
+                                'context' => 'databox1',
+                                'name' => $accessRes,
+                                'column1' => run("display:access_level_select",array("edit_comment_access",$post->access,$post->owner))
+                            )
+                            );
+
+        //captcha
+        $run_result .= run('mod:captcha:display');
         
         $run_result .= templates_draw(array(
         
