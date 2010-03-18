@@ -10,7 +10,17 @@
 [2] - value to set
     
 */
+    
+$userid = (int) $parameter[1];
 
-user_flag_set($parameter[0],$parameter[2],$parameter[1]);
+// Unset the flag first
+run("users:flags:unset",array($parameter[0], $userid));
+
+// Then add data
+$flag = new StdClass;
+$flag->flag = $parameter[0];
+$flag->user_id = $userid;
+$flag->value = $parameter[2];
+insert_record('user_flags',$flag);
         
 ?>

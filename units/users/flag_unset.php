@@ -14,6 +14,7 @@
 $flagname = $parameter[0];
 $userid = (int) $parameter[1];
 
-user_flag_unset($flagname,$userid);
+// Then add data
+delete_records('user_flags','flag',$flagname,'user_id',$userid);
 
 ?>

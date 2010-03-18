@@ -1,7 +1,7 @@
 <?php
 
-    $ident = (int) $parameter;
+$ident = (int) $parameter;
 
-    $run_result = user_info('name',$ident);
+$run_result = get_field('users','name','ident',$ident);
 
 ?>

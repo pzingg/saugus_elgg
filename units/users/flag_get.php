@@ -17,6 +17,10 @@ false - if it isn't
 $flagname = $parameter[0];
 $userid = (int)$parameter[1];
 
-$run_result = user_flag_get($flagname,$userid);
+if ($result = get_record('user_flags','flag',$flagname,'user_id',$userid)) {
+    $run_result = stripslashes($result->value);
+} else {
+    $run_result = false;
+}
 
 ?>

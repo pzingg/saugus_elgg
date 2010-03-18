@@ -1,6 +1,18 @@
 <?php
 
-    // Now just polls the user_info_username function
-    $run_result = user_info_username('ident',$parameter);
+// Name table
+
+global $name_to_id_table;
+
+// Returns user's ID from a given name
+
+if (isset($parameter) && $parameter != "") {
+    
+    if (!isset($name_to_id_table[$parameter])) {
+        $name_to_id_table[$parameter] = get_field('users','ident','username',$parameter);
+    }
+    $run_result = $name_to_id_table[$parameter];
+    
+}
         
 ?>
