@@ -1,0 +1,70 @@
+Elgg would not be possible without the people contributing to its
+code.  The following people have made additions and changes to the
+core release, and are listed in alphabetical order. This is not
+necessarily a canonical list; contributors may email system@elgg.net 
+in order to have contact details added or amended for the next
+release. We apologise for any omissions which may have arisen.
+
+Sven Edge
+http://elgg.net/sven/
+---------
+Misc programming and SQL optimisation
+
+David Eshelman
+http://www.ksucentral.com/esh/
+------------------------------
+Icon upload
+
+James Heinrich
+http://phpthumb.sourceforge.net/
+--------------------------------
+phpThumb
+
+Misja Hoebe
+http://www.chn.nl/
+------------------
+XML-RPC
+Atom
+Visualisation
+Misc code changes
+
+Leonard Lin
+http://www.usc.edu/~lhl/
+------------------------
+Cookied logins
+Authentication refactoring
+
+Mancomm Performance Inc
+http://www.mancomm.ca/
+----------------------
+Calendar plugin
+
+MoxieCode Systems AB
+http://tinymce.moxiecode.com/
+-----------------------------
+TinyMCE
+
+New Zealand Open Source VLE Project
+http://eduforge.org/projects/nzvle
+----------------------------------
+Architectural changes, key source code contributions
+
+Music Player Project
+http://musicplayer.sourceforge.net/
+-----------------------------------
+Music Player
+
+WordPress
+http://www.wordpress.org
+-----------------------------------
+Connections, Northern, Gentle Calm themes
+
+David Tosh
+http://elgg.net/dtosh/
+----------------------
+Project Manager
+
+Ben Werdmuller
+http://elgg.net/bwerdmuller/
+----------------------
+Technical Director
