@@ -1,7 +1,6 @@
 <?php
     
     // Run includes
-        define("context","external");
         require_once(dirname(dirname(__FILE__))."/includes.php");
         templates_page_setup();
 

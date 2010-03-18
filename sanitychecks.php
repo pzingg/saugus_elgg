@@ -30,6 +30,19 @@
     }
     
     
+    // Set defaults for some variables
+    
+    if (!isset($CFG->publicinvite)) {
+        $CFG->publicinvite = $CFG->publicreg;
+    }
+    if (!isset($CFG->emailfilter)) {
+        $CFG->emailfilter = "";
+    }
+    if (!isset($CFG->walledgarden)) {
+        $CFG->walledgarden = 0;
+    }
+    
+    
     if (ini_get('register_globals')) {
         // this shouldn't be needed due to the htaccess file, but just in case...
         $diemessages[] = "

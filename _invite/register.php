@@ -3,7 +3,7 @@
     //    ELGG join-with-no-invite page
 
     // Run includes
-        define("context","external");
+        define("context","login");
         require_once(dirname(dirname(__FILE__))."/includes.php");
         
         run("invite:init");

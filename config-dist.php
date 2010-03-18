@@ -42,12 +42,6 @@
 
     $CFG->publicinvite = true;
 
-// Set this to a positive number to cap the number of users in your
-// installation, for example if you're testing and only have a certain number
-// of resources available to you.
-
-    $CFG->maxusers = 0;
-
 // Set this to 1 to enable a walled garden - i.e., if you're not logged in,
 // all you can see is the login page.
 
@@ -106,6 +100,73 @@
 // A value of 0 disables automatic deletion.
 
     $CFG->rsspostsmaxage = 0;
+    
+// Set to true to enable owned users
+
+	$CFG->owned_users = false;
+	
+// Set to true to make all content created by owned users visible to all owners (ex: high school where all teachers need access to all student content)
+	
+	$CFG->owned_users_allaccess = false;
+    
+// Owned users caption - don't forget to add include(path . "units/ownedusers/main.php"); to system_includes.php
+// (looks best when inserted above Communities include)
+
+	$CFG->owned_users_caption = 'Students';
+	
+// Enables/disables public comments system wide
+
+	$CFG->public_comments = true;
+	
+// Enables/disables remember login option on login page
+
+	$CFG->remember_login_option = true;
+	
+// Enables/disables forgotten password link on login page
+
+	$CFG->forgotten_password_link = true;
+	
+// Enables/disables Your Resources
+
+	$CFG->your_resources_enabled = true;
+	
+// Enables/disables FOAF
+
+	$CFG->foaf_enabled = true;
+	
+// Enables/disables AddThis button for posts
+
+	$CFG->addthis_enabled = false;
+	
+// Set this option to true if you want to automatically promote access control settings for files
+// to match access control settings for the posts which embed them. For example, if you have a file
+// set to private and embed it in a post marked public, the file access will automatically be updated
+// to public. Will only promote file access, will not demote.
+
+	$CFG->file_auto_promote = true;
+	
+// LDAP Authentication
+// This function enables authentication via an ldap server, with fallback to local authentication.
+// $CFG->ldap_server should be set to a standard ldap url for the server. Start url with ldap:
+// for a non-ssl (insecure) connection, or if your server uses TLS (for tls, set $CFG->ldap_use_tls
+// to true). If $CFG->ldap_debug is set to true, ldap errors will be displayed directly on the login
+// page. If $CFG->ldap_auto_create is set to true, then an Elgg user account will automatically be
+// created on a successful ldap authentication, if it does not already exist. $CFG->ldap_property will
+// depend on the LDAP objectClasses of the user objects. cn usually works, but some need uid instead. 
+// Note that php must have been built with all the ldap libraries for this code to work. 
+
+//	$CFG->auth = "ldap";
+//	$CFG->ldap_server = "ldaps://ldapserver.domain.com/";
+//	$CFG->ldap_context = "ou=myorgunit,dc=mycompany,dc=com";
+//  $CFG->ldap_protocol_version = 3;
+//  $CFG->ldap_use_tls = false;
+//	$CFG->ldap_debug = false;
+//	$CFG->ldap_auto_create = false;
+//	$CFG->ldap_property = "cn";
+
+// Folio (Wiki) Functionality
+// Enable/disable folio plugin
+	$CFG->folio = false;
 
 //
 //   Capture performance profiling data
@@ -134,13 +195,8 @@
 
 // TEMPLATES HANDLING
 //$CFG->disable_usertemplates = true;  // users can only choose from available templates
-//$CFG->disable_templatechanging = true; // users can't change their template at all
-//Templates root defaults to /_templates; if you change this, you will need
-//to move or copy /_templates/Default_Template/ to the new location
-//$CFG->templatesroot = '/some/path/'; // use on-disk templates instead of DB templates 
-
-//Template file handing is not currently recommended.
 //$CFG->templatestore = 'db';          // 'db' (default) or 'files' (requires $CFG->templatesroot to be set)
+//$CFG->templatesroot = '/some/path/'; // use on-disk templates instead of DB templates 
 
 // set up some LMS hosts.
 // --------------------------------------------------
@@ -169,7 +225,7 @@
 // Some other $CFG variables found in codebase
 
 // $CFG->admin
-// $CFG->allowobjectembed
+$CFG->allowobjectembed = true;
 // $CFG->aspellpath
 // $CFG->auth
 // $CFG->cachetext
