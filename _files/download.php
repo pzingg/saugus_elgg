@@ -34,6 +34,7 @@ if (!empty($id)) {
                 // "Cache-Control: private" to allow a user's browser to cache the file, but not a shared proxy
                 // Also to override PHP's default "DON'T EVER CACHE THIS EVER" header
                 header("Cache-Control: private");
+                header("Pragma: private");
                 
                 if ($mimetype == "application/octet-stream") {
                     header('Content-Disposition: attachment');
