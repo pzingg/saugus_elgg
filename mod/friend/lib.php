@@ -26,34 +26,35 @@ function friend_pagesetup() {
             $friends_username = run("users:id_to_name",$page_owner);
             
             $PAGE->menu_sub[] = array( 'name' => 'friend',
-                                       'html' => a_href("{$CFG->wwwroot}{$friends_username}/friends/" ,
+                                       'html' => a_hrefg("{$CFG->wwwroot}{$friends_username}/friends/" ,
                                                           gettext("Friends"))); 
             
             $PAGE->menu_sub[] = array( 'name' => 'friend:of',
-                                       'html' => a_href( "{$CFG->wwwroot}_friends/friendsof.php?owner=$page_owner",
+                                       'html' => a_hrefg( "{$CFG->wwwroot}_friends/friendsof.php?owner=$page_owner",
                                                           gettext("Friend of"))); 
 
             $PAGE->menu_sub[] = array( 'name' => 'friend:requests',
-                                       'html' => a_href( "{$CFG->wwwroot}_friends/requests.php?owner=$page_owner",
+                                       'html' => a_hrefg( "{$CFG->wwwroot}_friends/requests.php?owner=$page_owner",
                                                           gettext("Friendship requests")));
             
-            $PAGE->menu_sub[] = array( 'name' => 'friend:foaf',
-                                       'html' => a_href( "{$CFG->wwwroot}{$friends_username}/foaf/",
+            if ($CFG->foaf_enabled)
+            	$PAGE->menu_sub[] = array( 'name' => 'friend:foaf',
+                                       'html' => a_hrefg( "{$CFG->wwwroot}{$friends_username}/foaf/",
                                                           gettext("FOAF"))); 
 
             if (isloggedin()) {
                 $PAGE->menu_sub[] = array( 'name' => 'friend:accesscontrols',
-                                           'html' => a_href( "{$CFG->wwwroot}_groups/",
+                                           'html' => a_hrefg( "{$CFG->wwwroot}_groups/",
                                                               gettext("Access controls")));
 
-                if ($CFG->publicinvite == true && ($CFG->maxusers == 0 || (count_users('person') < $CFG->maxusers))) {
+                if ($CFG->publicinvite == true) {
                     $PAGE->menu_sub[] = array( 'name' => 'friend:invite',
-                                               'html' => a_href( "{$CFG->wwwroot}_invite/",
+                                               'html' => a_hrefg( "{$CFG->wwwroot}_invite/",
                                                                   gettext("Invite a friend"))); 
                 }
                 
                 $PAGE->menu_sub[] = array( 'name' => 'friend:help',
-                                           'html' => a_href( "{$CFG->wwwroot}help/network_help.php",
+                                           'html' => a_hrefg( "{$CFG->wwwroot}help/network_help.php",
                                                               gettext("Page help")));
                 
                 

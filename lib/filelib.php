@@ -55,6 +55,7 @@ function mimeinfo($element, $filename) {
         'm3u'  => array ('type'=>'audio/x-mpegurl', 'icon'=>'audio.gif'),
         'mp3'  => array ('type'=>'audio/mp3', 'icon'=>'audio.gif'),
         'mp4'  => array ('type'=>'video/mp4', 'icon'=>'video.gif'),
+        'm4a'  => array ('type'=>'audio/mp4', 'icon'=>'video.gif'),
         'mpeg' => array ('type'=>'video/mpeg', 'icon'=>'video.gif'),
         'mpe'  => array ('type'=>'video/mpeg', 'icon'=>'video.gif'),
         'mpg'  => array ('type'=>'video/mpeg', 'icon'=>'video.gif'),
@@ -90,7 +91,8 @@ function mimeinfo($element, $filename) {
         'rm'   => array ('type'=>'audio/x-pn-realaudio', 'icon'=>'audio.gif'),
         'rtf'  => array ('type'=>'text/rtf', 'icon'=>'text.gif'),
         'rtx'  => array ('type'=>'text/richtext', 'icon'=>'text.gif'),
-        'sh'   => array ('type'=>'application/x-sh', 'icon'=>'text.gif'),
+        'sb'   => array ('type'=>'application/x-sb', 'icon'=>'text.gif'),
+		'sh'   => array ('type'=>'application/x-sh', 'icon'=>'text.gif'),
         'sit'  => array ('type'=>'application/x-stuffit', 'icon'=>'zip.gif'),
         'smi'  => array ('type'=>'application/smil', 'icon'=>'text.gif'),
         'smil' => array ('type'=>'application/smil', 'icon'=>'text.gif'),
@@ -494,6 +496,8 @@ function spitfile_with_mtime_check ($filepath, $mimetype) {
                 exit;
             }
         }
+        
+        header("Content-length: ". filesize($filepath));
         
         if ($mimetype) {
             header("Content-type: $mimetype");

@@ -8,10 +8,10 @@ function template_pagesetup() {
 
     $page_owner = $profile_id;
 
-    if (defined("context") && context == "account" && !$CFG->disable_templatechanging) {
+    if (defined("context") && context == "account") {
         if ($page_owner == $_SESSION['userid'] && $page_owner != -1) {
             $PAGE->menu_sub[] = array( 'name' => 'template:change',
-                                       'html' => a_href( "{$CFG->wwwroot}_templates/",
+                                       'html' => a_hrefg( "{$CFG->wwwroot}_templates/",
                                                           gettext("Change theme")));  
         }
     }

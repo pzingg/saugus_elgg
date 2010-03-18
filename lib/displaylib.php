@@ -147,6 +147,7 @@ END;
         case "aim":
         case "msn":
         case "skype":
+        case "twitter":
         case "icq":
             $run_result .= "<input type=\"text\" name=\"".$parameter[0]."\" value=\"".htmlspecialchars(stripslashes($parameter[1]), ENT_COMPAT, 'utf-8')."\" style=\"width: 95%\" id=\"".$cleanid."\" />";
             break;
@@ -172,8 +173,6 @@ function log_on_pane () {
     global $data;
 
     global $page_owner;
-    
-    global $CFG;
         
     // If this is someone else's portfolio, display the user's icon
     if ($page_owner != -1) {
@@ -184,7 +183,7 @@ function log_on_pane () {
 
         $body = '<form action="'.url.'login/index.php" method="post">';
 
-        if (public_reg == true && ($CFG->maxusers == 0 || (count_users('person') < $CFG->maxusers))) {
+        if (public_reg == true) {
             $reg_link = '<a href="' . url . '_invite/register.php">'. gettext("Register") .'</a> |';
         } else {
             $reg_link = "";
@@ -274,6 +273,9 @@ function display_output_field ($parameter) {
             break;
         case "skype":
             $run_result = "<a href=\"callto://".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."\">".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."</a> <img src=\"http://goodies.skype.com/graphics/skypeme_btn_small_white.gif\" alt=\"Skype Me!\" border=\"0\" />";
+            break;
+        case "twitter":
+            $run_result = "<a href=\"http://twitter.com/".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."\">".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."</a> <img src=\"".url."_files/twitter.gif\" alt=\"twitterlogo\" border=\"0\" />";
             break;
         case "msn":
             $run_result = "MSN <b>".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."</b>";

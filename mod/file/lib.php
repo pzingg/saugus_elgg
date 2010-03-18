@@ -22,22 +22,19 @@ function file_pagesetup() {
         
         $files_username = run("users:id_to_name",$page_owner);
         
-        if ($page_owner == $_SESSION['userid'] && $page_owner != -1) {
+        if (run("permissions:check", "files")) {
             $PAGE->menu_sub[] = array( 'name' => 'file:add',
-                                       'html' => a_href( "#addFile",
-                                                          gettext("Add a file or a folder")));           
-        }
-        if ($page_owner != -1) {
-            if ($page_owner == $_SESSION['userid'] && $page_owner != -1) {
-                $PAGE->menu_sub[] = array( 'name' => 'file:rss',
-                                           'html' => a_href( $CFG->wwwroot.$_SESSION['username']."/files/rss/", 
-                                                              gettext("RSS feed for files")));  
-            }
-            if ($page_owner == $_SESSION['userid'] && $page_owner != -1) {
-                $PAGE->menu_sub[] = array( 'name' => 'file:help',
-                                           'html' => a_href( $CFG->wwwroot."help/files_help.php",
-                                                              gettext("Page help")));  
-            }
+                                       'html' => a_hrefg( "#addFile",
+                                                          gettext("Add a file or a folder")));  
+                                                                    
+            $PAGE->menu_sub[] = array( 'name' => 'file:rss',
+                                       'html' => a_hrefg( $CFG->wwwroot.$files_username."/files/rss/", 
+                                                          gettext("RSS feed for files")));  
+
+            $PAGE->menu_sub[] = array( 'name' => 'file:help',
+                                       'html' => a_hrefg( $CFG->wwwroot."help/files_help.php",
+                                                          gettext("Page help")));  
+            
         }
     }
 }
