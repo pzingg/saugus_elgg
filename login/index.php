@@ -24,7 +24,7 @@ $l = optional_param('username');
 $p = optional_param('password');
 
 if (!empty($l) && !empty($p)) {
-    $ok = authenticate_account($l, md5($p));
+    $ok = authenticate_account($l, $p);
     if ($ok) {
         $messages[] = gettext("You have been logged on.");
         define('redirect_url', $redirect_url);
