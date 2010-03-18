@@ -41,13 +41,17 @@
         
     // Turn file ID into a link
         $function['files:links:make'][] = path . "units/files/files_links_make.php";
+        $function['files:links:make:rss'][] = path . "units/files/files_links_make_rss.php";
+        
+    // Update file access rights to match post rights automatically
+    	$function['files:access:update'][] = path . "units/files/files_access_update.php";
         
     // Load default template
         $function['init'][] = path . "units/files/default_templates.php";
 
     // Allow users to embed files in weblog posts
-        $function['weblogs:posts:add:fields'][] = path . "units/files/weblogs_posts_add_fields.php";
-        $function['weblogs:posts:edit:fields'][] = path . "units/files/weblogs_posts_add_fields.php";
+//        $function['weblogs:posts:add:fields'][] = path . "units/files/weblogs_posts_add_fields.php";
+        $function['weblogs:posts:edit:fields:files'][] = path . "units/files/weblogs_posts_add_fields.php";
         $function['weblogs:text:process'][] = path . "units/files/weblogs_text_process.php";
                     
     // Log on bar down the right hand side

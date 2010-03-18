@@ -48,15 +48,30 @@ global $CFG;
             }
 
             if (is_array($entries) && sizeof($entries) > 0) {
+            	$More = gettext("More");
                 foreach($entries as $entry) {
                     $title = (stripslashes($entry->title));
                     $link = url . $entry->username . "/weblog/" . $entry->ident . ".html";
-                    $body = (run("weblogs:text:process",stripslashes($entry->body)));
+//                    $body = (run("weblogs:text:process",stripslashes($entry->body)));
+					global $RSS_ENCLOSURE;
+					$RSS_ENCLOSURE = "";
+					$body = nl2br(trim(stripslashes($entry->body)));
+					$body  = run("weblogs:html_activate_urls", $body);
+					$functionbody = <<< END
+            
+            return run("files:links:make:rss",\$matches[1]);
+            
+END;
+
+            		$body = preg_replace_callback("/\{\{file:([0-9]+)\}\}/i",create_function('$matches',$functionbody),$body);
+                    $body = str_replace("{{more}}","<a href=\"" . url .$entry->username."/weblog/".$entry->ident.".html\">$More ...</a>",$body);
+                    
                     $pubdate = gmdate("D, d M Y H:i:s T", $entry->posted);
                     $keywordtags = "";
                     if ($keywords = get_records_select('tags','tagtype = ? AND ref = ?',array('weblog',$entry->ident))) {
                         foreach($keywords as $keyword) {
-                            $keywordtags .= "\n\t\t<dc:subject><![CDATA[" . (stripslashes($keyword->tag)) . "]]></dc:subject>";
+                            //$keywordtags .= "\n\t\t<dc:subject><![CDATA[" . (stripslashes($keyword->tag)) . "]]></dc:subject>";
+                            $keywordtags .= "\n\t\t<category domain=\"http://technorati.com/tag\">" . (stripslashes($keyword->tag)) . "</category>";
                         }
                     }
                     $run_result .= <<< END
@@ -66,7 +81,9 @@ global $CFG;
             <link>$link</link>
             <guid isPermaLink="true">$link</guid>
             <pubDate>$pubdate</pubDate>$keywordtags
+            <dc:creator>$entry->username</dc:creator>
             <description><![CDATA[$body]]></description>
+            $RSS_ENCLOSURE
         </item>
         
 END;

@@ -33,6 +33,7 @@ if (isset($parameter[0]) && sizeof($parameter) > 1 /*&& $parameter[1][0] != 0*/)
 END;
         foreach($parameter[1] as $key => $ident) {
             $ident = (int) $ident;
+            // if (!isset($_SESSION['user_info_cache'][$ident])) {
             $info = get_record('users','ident',$ident);
             $_SESSION['user_info_cache'][$ident] = $info;
             $info = $info;
@@ -47,7 +48,10 @@ END;
             // $username = htmlspecialchars(stripslashes($info->name), ENT_COMPAT, 'utf-8');
             $username = run("profile:display:name",$info->ident);
             $usermenu = '';
-
+            // not used - sven
+            // if ($info->ident == $profile_id || (logged_on && (!isset($profile_id) && $info->ident == $_SESSION['userid']))) {
+            //     $rsslink = '<br /><a href="' . $CFG->wwwroot . $info->username . '/rss/">RSS</a> | <a href="' . $CFG->wwwroot . $info->username . '/tags/">' . gettext("Tags") . '</a> | <a href="' . $CFG->wwwroot . $info->username . '/newsclient/">' . gettext("Resources") . "</a>";
+            // }
             $body .= <<< END
         <li>
             <a href="{$CFG->wwwroot}{$info->username}/">{$username}</a>

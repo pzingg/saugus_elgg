@@ -4,6 +4,12 @@
     /*
     *    Users plug-in
     */
+
+    // Load configuration
+        require_once(dirname(__FILE__)."/conf.php");
+    
+    // Library functions
+        require_once(dirname(__FILE__)."/library.php");
     
     // Actions to perform on initialisation
         $function['init'][] = path . "units/users/function_session_start.php";
