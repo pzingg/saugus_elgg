@@ -32,7 +32,152 @@ function main_upgrade($oldversion=0) {
                               KEY `name` (`name`)
                             ) TYPE=MyISAM;");
     }
-
+    if ($oldversion < 2008032844) {
+    	// added folio (wiki) functions
+    	/* ---------------------------------------------------------------
+		Page
+		Currently not using formatpage_ident column.  Built in now to support templating.
+		--------------------------------------------------------------- */
+			execute_sql( 
+					"CREATE TABLE `{$CFG->prefix}folio_page` (
+					  `page_ident` int(11) NOT NULL default '0',
+					  `user_ident` int(11) NOT NULL default '0',
+					  `created` int(11) NOT NULL default '0',
+					  `creator_ident` int(11) default NULL,
+					  `title` varchar(255) NOT NULL default '',
+					  `newest` tinyint(1) NOT NULL default '0',
+					  `parentpage_ident` int(11) NOT NULL default '-1',
+					  `format_ident` int(11) NOT NULL default '0',
+					  `body` text NOT NULL,
+					  `security_ident` int(11) NOT NULL default '-1',
+					  PRIMARY KEY  (`page_ident`,`created`),
+					  KEY `Index_user` (`user_ident`),
+					  KEY `Index_title` (`title`),
+					  KEY `Index_newest` (`newest`),
+					  KEY `Index_parent` (`parentpage_ident`)
+					);"
+					);
+		
+		/* ---------------------------------------------------------------
+		 Page Security
+		
+		There can be multiple security records for a single page.  They differ
+		only in that they have multiple user_ids.  They should all have the same
+		security levels.  This lets us keep track of the different involved users.
+		
+		Currently 3 levels are implemented, public, moderated, and private.  Public 
+		is wide open, everyone can read/write.  Moderated is public readable, but
+		only setable by owners.  Private is readable and setable only by owners.
+		Owners are defined as people who have a security record with their id.
+		
+		The interface doesn't currently handle inheriting.  Will re-implement again 
+		at a later date.
+				 --------------------------------------------------------------- */
+			execute_sql( 
+					"CREATE TABLE `{$CFG->prefix}folio_page_security` (
+					  `security_ident` int(11) NOT NULL default '0',
+					  `user_ident` int(11) NOT NULL default '0',
+					  `accesslevel` varchar(100) NOT NULL default 'member',
+					  PRIMARY KEY  (`user_ident`,`security_ident`,`accesslevel`),
+					  KEY `Index_security` (`security_ident`)
+					);"
+					);
+		
+		/* ---------------------------------------------------------------
+		Tree
+		
+		This contains nodes for navigating between objects.  
+		
+		Probably needs some more indexes (along with the rest of the folio
+		tables).
+		
+		Not currently being used.  Will implement for the presentation module, and possibly 
+		the ability to import/link to other people's pages.
+		--------------------------------------------------------------- */
+			execute_sql( 
+					"CREATE TABLE `{$CFG->prefix}folio_tree` (
+					  `node_ident` int(10) unsigned NOT NULL auto_increment,
+					  `alink_type` varchar(45) NOT NULL default '',
+					  `alink_ident` int(10) unsigned NOT NULL default '0',
+					  `blink_type` varchar(45) NOT NULL default '',
+					  `blink_ident` int(10) unsigned NOT NULL default '0',
+					  `blink_caption` varchar(45) NOT NULL default '',
+					  PRIMARY KEY  (`node_ident`),
+					  KEY `a_link` (`alink_ident`),
+					  KEY `b_link` (`blink_ident`)
+					);"
+					);
+		
+		/* ---------------------------------------------------------------
+		Folio Comments.
+		Comments on different items inside of the add-in.
+		--------------------------------------------------------------- */
+		
+			execute_sql( 
+					"CREATE TABLE `{$CFG->prefix}folio_comment` (
+					  `activity_ident` int(11) NOT NULL auto_increment,
+					  `item_type` varchar(100) NOT NULL default '',
+					  `item_ident` int(11) NOT NULL default '0',
+					  `item_title` varchar(254) NOT NULL default '',
+					  `item_owner_username` varchar(254) NOT NULL default '',
+					  `item_owner_name` varchar(254) NOT NULL default '',
+					  `creator_username` varchar(254) NOT NULL default '',
+					  `creator_ident` int(11) NOT NULL default '0',
+					  `creator_name` varchar(254) NOT NULL default '',
+					  `body` text NOT NULL,
+					  `access` varchar(100) NOT NULL default '',
+					  `posted` int(11) NOT NULL default '0',
+					  `item_owner_ident` int(10) unsigned NOT NULL default '0',
+					  PRIMARY KEY  (`activity_ident`),
+					  KEY `Index_type` (`item_type`),
+					  KEY `Index_ident` (`item_type`)
+					);"
+					);
+					
+		/* ---------------------------------------------------------------
+		Folio RSS.
+		Stores RSS feeds
+		--------------------------------------------------------------- */
+					
+			execute_sql( 
+					"CREATE TABLE `{$CFG->prefix}folio_rss` (
+					  `type_ident` int(10) unsigned NOT NULL default '0',
+					  `type` varchar(45) NOT NULL default '',
+					  `user_ident` int(10) unsigned NOT NULL default '0',
+					  `user_username` varchar(45) NOT NULL default '',
+					  `user_name` varchar(255) NOT NULL default '',
+					  `owner_ident` int(10) unsigned NOT NULL default '0',
+					  `title` text NOT NULL,
+					  `body` text NOT NULL,
+					  `link` varchar(255) NOT NULL default '',
+					  `created` int(10) unsigned NOT NULL default '0',
+					  `owner_username` varchar(255) NOT NULL default '',
+					  `access` varchar(255) NOT NULL default 'PUBLIC',
+					  PRIMARY KEY  (`type_ident`,`type`,`created`),
+					  KEY `Index_user` (`user_ident`),
+					  KEY `Index_owner` (`owner_ident`)
+					);"
+					);
+		
+		/* ---------------------------------------------------------------
+		Tracks what version of the db we're working with.
+		--------------------------------------------------------------- */
+					
+			execute_sql(
+					"CREATE TABLE  `{$CFG->prefix}folio_version` (
+					  `version` int(10) unsigned NOT NULL auto_increment,
+					  PRIMARY KEY  (`version`)
+					);"
+			);
+					
+		// Update version to schema 5
+			$version = new StdClass;
+			$version->version = 5;
+			insert_record("folio_version",$version);
+    }
+    if ($oldversion < 2006081003) {
+		table_column('weblog_comments', '', 'access', 'varchar', '20', '', 'PUBLIC', 'NOT NULL', 'posted');
+	}
     if ($oldversion < 2006010600) {
         execute_sql("
             CREATE TABLE `{$CFG->prefix}weblog_watchlist` (
@@ -267,6 +412,15 @@ function main_upgrade($oldversion=0) {
                 $upload_folder = $textlib->substr($icon->username,0,1);
                 $fromfile = $CFG->dirroot.'_icons/data/'.$icon->filename;
                 $tofile = $CFG->dataroot.'icons/'.$upload_folder.'/'.$icon->username.'/'.$icon->filename;
+                echo "<p>" . sprintf(gettext("Moving icon file %s to %s"),$fromfile,$tofile) . "</p>";
+	            if (!is_dir($CFG->dataroot.'icons/'.$upload_folder)) {
+			        umask(0000);
+			        $status = mkdir($CFG->dataroot.'icons/'.$upload_folder,$CFG->directorypermissions);
+			    }
+            	if (!is_dir($CFG->dataroot.'icons/'.$upload_folder.'/'.$icon->username)) {
+			        umask(0000);
+			        $status = mkdir($CFG->dataroot.'icons/'.$upload_folder.'/'.$icon->username,$CFG->directorypermissions);
+			    }
                 copy_file($fromfile,$tofile);
             }
         }
@@ -327,34 +481,34 @@ function main_upgrade($oldversion=0) {
         
         // Clean up slashes
         
-        execute_sql("update {$CFG->prefix}weblog_posts set title = replace(title,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}weblog_posts set title = replace(title,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}weblog_posts set title = replace(title,'\\\"','\"')");
-        execute_sql("update {$CFG->prefix}weblog_posts set body = replace(body,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}weblog_posts set body = replace(body,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}weblog_posts set body = replace(body,'\\\"','\"')");
         
-        execute_sql("update {$CFG->prefix}weblog_comments set body = replace(body,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}weblog_comments set body = replace(body,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}weblog_comments set body = replace(body,'\\\"','\"')");
-        execute_sql("update {$CFG->prefix}weblog_comments set postedname = replace(postedname,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}weblog_comments set postedname = replace(postedname,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}weblog_comments set postedname = replace(postedname,'\\\"','\"')");
         
-        execute_sql("update {$CFG->prefix}tags set tag = replace(tag,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}tags set tag = replace(tag,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}tags set tag = replace(tag,'\\\"','\"')");
         
-        execute_sql("update {$CFG->prefix}files set title = replace(title,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}files set title = replace(title,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}files set title = replace(title,'\\\"','\"')");
-        execute_sql("update {$CFG->prefix}files set description = replace(description,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}files set description = replace(description,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}files set description = replace(description,'\\\"','\"')");
         
-        execute_sql("update {$CFG->prefix}file_folders set name = replace(name,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}file_folders set name = replace(name,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}file_folders set name = replace(name,'\\\"','\"')");
         
-        execute_sql("update {$CFG->prefix}profile_data set value = replace(value,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}profile_data set value = replace(value,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}profile_data set value = replace(value,'\\\"','\"')");
         
-        execute_sql("update {$CFG->prefix}users set name = replace(name,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}users set name = replace(name,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}users set name = replace(name,'\\\"','\"')");
         
-        execute_sql("update {$CFG->prefix}groups set name = replace(name,'\\\\\'','\'')");
+        execute_sql("update {$CFG->prefix}groups set name = replace(name,'\\\'','\'')");
         execute_sql("update {$CFG->prefix}groups set name = replace(name,'\\\"','\"')");
         
     }
