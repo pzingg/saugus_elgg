@@ -39,8 +39,8 @@ templates_page_setup();
 if ($profile_new = data_submitted()) {
     $body = profile_update($profile_new);
 } else {
-    $body = $profile->display_form();
-}   
+    $body = $profile->display_form() . include $CFG->dirroot . "units/tinymce/tinymce_js.php";
+}
 $body = templates_draw(array( 'context' => 'contentholder',
                               'title' => $title,
                               'body' => $body   ));
