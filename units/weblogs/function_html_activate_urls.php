@@ -43,7 +43,7 @@
     // URL into links
     $str =
         preg_replace( "|\w{3,10}://[\w\.\-_]+(:\d+)?[^\s\"\'<>\(\)\{\}]*|", 
-        "<a href=\"\\0\">[".gettext("Click to view link") . "]</a>", $str );
+        "<a href=\"\\0\">\\0</a>", $str );
     
     $str = str_replace("<marker>", '', $str);
     $run_result = str_replace($search, $replace, $str);

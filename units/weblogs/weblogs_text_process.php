@@ -30,17 +30,22 @@
         // Commented out for the moment as it seems to disproportionately increase
         // memory usage / load
         
-        /*
+        
         global $individual;
         
         if (!isset($individual) || $individual != 1) {
             $run_result = preg_replace("/\{\{cut\}\}(.|\n)*(\{\{uncut\}\})?/","{{more}}",$run_result);
+        	$pos = strpos($run_result, "{{more}}"); 
+			if ($pos != false) {
+				$run_result = substr($run_result,0,$pos+8);
+			}
         } else {
             // $run_result = preg_replace("/\{\{cut\}\}/","",$run_result);
             $run_result = str_replace("{{cut}}","",$run_result);
             $run_result = str_replace("{{uncut}}","",$run_result);
+            $run_result = str_replace("{{more}}","",$run_result);
         }
-        */
+        
     }
 
 ?>

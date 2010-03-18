@@ -48,6 +48,17 @@ END;
                                 'contents' => display_input_field(array("new_weblog_post",$contentBody,"weblogtext"))
                             )
                             );
+                            
+    $body .= run("weblogs:posts:edit:fields:files",$_SESSION['userid']);
+    
+//    if (! stripos($_SERVER['HTTP_USER_AGENT'],"Safari")) //no rich text in Safari - no worky
+    $body .= <<< END
+    <p>
+      Embed an external video or other widget:<br />(Copy and paste embed code from external web site)<br />
+                <span id="embed"><textarea name="weblog_embed_object" id="weblog_embed_object" rows="3" cols="40"></textarea>
+                <input type="button" value="Embed" onclick="tinyMCE.execCommand('mceInsertRawHTML',true,this.form.weblog_embed_object.value);tinyMCE.execCommand('mceCleanup');" /></span>
+            </p>
+END;
 
     $body .= templates_draw(array(
                                 'context' => 'databoxvertical',

@@ -34,6 +34,7 @@
         $function['weblogs:text:process'][] = path . "units/weblogs/weblogs_text_process.php";
         $function['weblogs:archives:view'][] = path . "units/weblogs/archives_view.php";
         $function['weblogs:archives:month:view'][] = path . "units/weblogs/weblogs_view_month.php";
+        $function['weblogs:comments:view'][] = path . "units/weblogs/weblogs_comments_view.php";
         
     // Mark posts as interesting (or not)
         $function['weblogs:interesting:form'][] = path . "units/weblogs/display_interesting_post_form.php";

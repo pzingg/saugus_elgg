@@ -11,7 +11,6 @@ global $CFG;
 $weblog_offset = optional_param('weblog_offset',0,PARAM_INT);
 
 // Get all posts in the system that we can see
-
 $where = run("users:access_level_sql_where",$_SESSION['userid']);
 $posts = get_records_select('weblog_posts','('.$where.') AND weblog = '.$profile_id,null,'posted DESC','*',$weblog_offset,'25');
 $numberofposts = count_records_select('weblog_posts','('.$where.') AND weblog = '.$profile_id);
