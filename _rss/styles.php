@@ -221,6 +221,7 @@ height: 91px;
 
         $url = $CFG->wwwroot . optional_param('url','',PARAM_LOCALURL);
         $rssurl = $CFG->wwwroot . optional_param('rssurl','',PARAM_LOCALURL);
+        $itunesurl = preg_replace('/https?/','pcast',$rssurl);
 
         $output = <<< END
                <div id="header"><!-- start header -->
@@ -229,7 +230,7 @@ height: 91px;
         
 END;
         
-        if (logged_on) {
+        if (logged_on && $CFG->your_resources_enabled) {
 
         $subscribeurl = url . "_rss/subscriptions.php?profile_name=" . $_SESSION['username'];
         
@@ -256,7 +257,8 @@ END;
             $subother
         </p>
         <ul>
-            <li><a href="http://www.bloglines.com/sub/$rssurl"><img src="http://solosub.com/img/bloglines.png" alt="Bloglines" /></a></li><li> 
+            <li><a href="$itunesurl"><img src="{$CFG->wwwroot}_templates/itunesbadge.gif" alt="Apple iTunes" /></a> </li><li>
+            <a href="http://www.bloglines.com/sub/$rssurl"><img src="http://solosub.com/img/bloglines.png" alt="Bloglines" /></a></li><li> 
             <a href="http://add.my.yahoo.com/rss?url=$rssurl"><img src="http://us.i1.yimg.com/us.yimg.com/i/us/my/addtomyyahoo4.gif" alt="My Yahoo" /></a> </li><li> 
             <a href="http://my.msn.com/addtomymsn.armx?id=rss&amp;ut=$rssurl&amp;tt=CENTRALDIRECTORY&amp;ru=http://rss.msn.com'"><img src="http://solosub.com/img/mymsn.gif" alt="MyMSN" /></a></li><li> 
             <a href="http://www.newsgator.com/ngs/subscriber/subext.aspx?url=$rssurl"><img src="http://www.newsgator.com/images/ngsub1.gif" alt="Newsgator" /></a> </li>
