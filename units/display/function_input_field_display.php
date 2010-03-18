@@ -121,6 +121,7 @@ END;
                 case "aim":
                 case "msn":
                 case "skype":
+                case "twitter":
                 case "icq":
                         $run_result .= "<input type=\"text\" name=\"".$parameter[0]."\" value=\"".htmlspecialchars(stripslashes($parameter[1]), ENT_COMPAT, 'utf-8')."\" style=\"width: 95%\" id=\"".$cleanid."\" />";
                         break;

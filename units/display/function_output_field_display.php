@@ -41,6 +41,9 @@
                 case "skype":
                         $run_result = "<a href=\"callto://".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."\">".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."</a> <img src=\"http://goodies.skype.com/graphics/skypeme_btn_small_white.gif\" alt=\"Skype Me!\" border=\"0\" />";
                         break;
+                case "twitter":
+                        $run_result = "<a href=\"http://twitter.com/".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."\">".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."</a> <img src=\"".$CFG->wwwroot."_files/twitter.gif\" alt=\"twitterlogo\" border=\"0\" />";
+                        break;
                 case "msn":
                         $run_result = "MSN <b>".htmlspecialchars(stripslashes($parameter[0]), ENT_COMPAT, 'utf-8')."</b>";
                         break;
