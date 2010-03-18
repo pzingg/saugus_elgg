@@ -1,10 +1,10 @@
 <?php
-
+	global $CFG;
     $sitename = sitename;
     $email = email;
     $run_result .= <<< END
 
-<h1>Privacy Policy</h1>
+<h1>$sitename Privacy Policy</h1>
 
 <p><b>What This Privacy Policy Covers</b></p>
 <ul>
@@ -12,7 +12,6 @@
 <li>This privacy policy covers how $sitename (hereafter named 'we') will treat personal information that we collect. Personal information is <b>your</b> information and includes identifiers like your name, address, email address, phone number.</li>
 <li>We must stress that we will not give out or sell any of your information to third parties. The information we do collect from you will only be used for statistical purposes.</li>
 <li>We will not send you any junk emails. Furthermore we will not send you any information unless you have specifically requested we do so. An exception to this rule will be the initial email validation when you create a new account.</li>
-<li>Children under 13 are not permitted to use the $sitename service, and so this privacy policy makes no provision for children's use of the site.</li>
 </ul>
 
 <p><b>Changes to this Privacy Policy</b></p>
