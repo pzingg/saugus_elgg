@@ -4,7 +4,7 @@ global $USER, $CFG;
 
         global $template;
         
-        if (isset($_REQUEST['action']) && logged_on && !$CFG->dispable_templatechanging) {
+        if (isset($_REQUEST['action']) && logged_on) {
             
             switch($_REQUEST['action']) {
                 
@@ -36,6 +36,9 @@ global $USER, $CFG;
                             if (record_exists('templates','ident',$id,'owner',$USER->ident)) {
                                 $templatetitle = trim($_REQUEST['templatetitle']);
                                 set_field('templates','name',$templatetitle,'ident',$id);
+                                if (isset($_REQUEST['templatepublic']) && run("users:flags:get", array("admin", $_SESSION['userid']))) {
+                                	set_field('templates','public',$_REQUEST['templatepublic'],'ident',$id);
+                                }
                                 delete_records('template_elements','template_id',$id);
                                 foreach($_REQUEST['template'] as $name => $content) {
                                     $te = new StdClass;

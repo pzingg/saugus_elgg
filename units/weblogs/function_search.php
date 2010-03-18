@@ -7,6 +7,7 @@ $inCategory = gettext("in category"); // gettext variable
 $rssForBlog = gettext("RSS feed for weblog posts by"); // gettext variable
 $otherUsers = gettext("Other users with weblog posts in category"); // gettext variable
 $otherUsers2 = gettext("Users with weblog posts in category"); // gettext variable
+$viewAll = gettext("View all weblog posts in category"); // gettext variable
 
 if (isset($parameter) && $parameter[0] == "weblog" || $parameter[0] == "weblogall") {
     
@@ -102,6 +103,7 @@ END;
                 $i++;
         }
         $body .= "</tr></table>";
+        $body .= "<a href=\"".url."_weblog/everyone.php?filter=tag&filtervalue=".urlencode(stripslashes($parameter[1]))."\">".$viewAll." '".$parameter[1]."'</a>";
         $run_result .= $body;
     }
     

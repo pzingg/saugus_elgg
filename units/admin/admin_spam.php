@@ -9,6 +9,7 @@ if (logged_on && run("users:flags:get", array("admin", $USER->ident))) {
         
     if ($spam = get_record('datalists','name','antispam')) {
             $spam = htmlspecialchars(stripslashes($spam->value), ENT_COMPAT, 'utf-8');
+            $spam = str_replace("&amp;","&",$spam); //add & characters back in for valid regex
     } else {
         $spam = "";
     }

@@ -3,7 +3,7 @@
 global $USER;
 global $CFG;
 
-if (empty($CFG->disable_usertemplates)) {
+if ((empty($CFG->disable_usertemplates)) && ($USER->owner == -1)) {
     // Create a new template
         $header = gettext("Create theme"); // gettext variable
         $desc = gettext("Here you can create your own themes based on one of the existing public themes. Just select which public theme you would like to alter and then create your own. You will now have edit privilages."); // gettext variable

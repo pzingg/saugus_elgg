@@ -20,16 +20,6 @@ function default_template () {
     $run_result = '';
 
     $template_definition[] = array(
-                                    'id' => 'css',
-                                    'name' => gettext("Stylesheet"),
-                                    'description' => gettext("The Cascading Style Sheet for the template."),
-                                    'glossary' => array(),
-                                    'display'  => 1,
-                                    );
-
-    $template['css'] = file_get_contents($CFG->templatesroot . "Default_Template/css");
-    
-    $template_definition[] = array(
                                    'id' => 'pageshell',
                                    'name' => gettext("Page Shell"),
                                    'description' => gettext("The main page shell, including headers and footers."),
@@ -45,7 +35,52 @@ function default_template () {
     
     $welcome = gettext("Welcome"); // gettext variable
        
-    $template['pageshell'] = file_get_contents($CFG->templatesroot . "Default_Template/pageshell");
+    $template['pageshell'] = <<< END
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{{title}}</title>
+{{metatags}}
+</head>
+<body>
+<!-- elgg banner and logo -->
+<div id="container"><!-- start container -->
+    <div id="statusbar"><!-- start statusbar -->
+        <div id="welcome"><!-- start welcome -->
+            <p>$welcome {{userfullname}}</p>
+        </div><!-- end welcome -->
+        {{topmenu}}
+    </div><!-- end statusbar -->
+    <div id="header"><!-- start header -->
+        <h1>$sitename</h1>
+            <h2>Community learning space</h2>
+            <ul id="navigation">
+                {{menu}}
+            </ul>
+    </div><!-- end header -->
+    <div id="content_holder"><!-- start contentholder -->
+        <div id="maincontent_container"><!-- start main content -->
+            {{messageshell}}
+            {{mainbody}}
+        </div><!-- end main content -->
+        <div id="sidebar_container">
+            <div id="sidebar"><!-- start sidebar -->
+                <ul><!-- open sidebar lists -->
+                {{sidebar}}
+                </ul>
+            </div><!-- end sidebar -->
+        </div><!-- end sidebar_container -->
+    </div><!-- end contentholder -->
+    <div class="clearall" />
+    <div id="footer"><!-- start footer -->
+        <a href="http://elgg.net/"><img src="{$CFG->wwwroot}_templates/elgg_powered.png" alt="Powered by Elgg" title="Powered by Elgg" border="0" /></a>
+    </div><!-- end footer -->
+</div><!-- end container -->
+</body>
+</html>
+            
+END;
 
     // REMOVED stylesheet (was old version and should not have been here)
     // TODO: extract all default template stuff from lib/templates.php
@@ -421,59 +456,59 @@ function templates_page_setup (){
 
     if (isadmin()) {
     $PAGE->menu_top [] = array( 'name' => 'admin',
-                                //'html' => a_href("{$CFG->wwwroot}_admin/", 
+                                //'html' => a_hrefg("{$CFG->wwwroot}_admin/", 
                                 //                "Administration"));
                                 'html' => "<li><a href=\"" . $CFG->wwwroot . "_admin/\">" . gettext("Administration") . "</a></li>");
     }
     
     $PAGE->menu_top[] = array(
                               'name' => 'userdetails',
-                              //'html' => a_href("{$CFG->wwwroot}_userdetails/", 
+                              //'html' => a_hrefg("{$CFG->wwwroot}_userdetails/", 
                               //                  "Account settings"));
                               'html' => "<li><a href=\"" . $CFG->wwwroot . "_userdetails/\">" . gettext("Account settings") . "</a></li>");
 
     $PAGE->menu_top[] = array(
                               'name' => 'logoff',
-                              //'html' => a_href("{$CFG->wwwroot}login/logout.php",
+                              //'html' => a_hrefg("{$CFG->wwwroot}login/logout.php",
                               //                 "Log off"));
                               'html' => "<li><a href=\"" . $CFG->wwwroot . "login/logout.php\">" . gettext("Log off") . "</a></li>");
 
     if (defined("context") && context == "account") {
         $PAGE->menu_sub[] = array(
                                   'name' => 'user:edit',
-                                  'html' => a_href("{$CFG->wwwroot}_userdetails/",
-                                                   gettext("Edit user details")));
+                                  'html' => a_hrefg("{$CFG->wwwroot}_userdetails/",
+                                                   "Edit user details"));
         $PAGE->menu_sub[] = array(
                                   'name' => 'user:icon',
-                                  'html' => a_href("{$CFG->wwwroot}_icons/",
-                                                   gettext("Your site picture")));
+                                  'html' => a_hrefg("{$CFG->wwwroot}_icons/",
+                                                   "Your site picture"));
     }
 
     if (defined("context") && context == "admin" && logged_on && run("users:flags:get",array("admin", $_SESSION['userid']))) {
         $PAGE->menu_sub[] = array(
                                   'name' => 'admin',
-                                  'html' => a_href("{$CFG->wwwroot}_admin/",
-                                                   gettext("Main")));
+                                  'html' => a_hrefg("{$CFG->wwwroot}_admin/",
+                                                   "Main"));
    
         $PAGE->menu_sub[] = array(
                                   'name' => 'admin:useradd',
-                                  'html' => a_href("{$CFG->wwwroot}_admin/users_add.php",
-                                                   gettext("Add users")));
+                                  'html' => a_hrefg("{$CFG->wwwroot}_admin/users_add.php",
+                                                   "Add users"));
 
         $PAGE->menu_sub[] = array(
                                   'name' => 'admin:users',
-                                  'html' => a_href("{$CFG->wwwroot}_admin/users.php",
-                                                   gettext("Manage users")));
+                                  'html' => a_hrefg("{$CFG->wwwroot}_admin/users.php",
+                                                   "Manage users"));
 
         $PAGE->menu_sub[] = array(
                                   'name' => 'admin:flaggedcontent',
-                                  'html' => a_href("{$CFG->wwwroot}_admin/flags.php",
-                                                   gettext("Manage flagged content")));
+                                  'html' => a_hrefg("{$CFG->wwwroot}_admin/flags.php",
+                                                   "Manage flagged content"));
    
         $PAGE->menu_sub[] = array(
                                   'name' => 'admin:spam',
-                                  'html' => a_href("{$CFG->wwwroot}_admin/antispam.php",
-                                                   gettext("Spam control")));
+                                  'html' => a_hrefg("{$CFG->wwwroot}_admin/antispam.php",
+                                                   "Spam control"));
             
     }
 
@@ -1131,7 +1166,7 @@ function templates_variables_substitute ($param) {
             if (logged_on) {
                 return htmlspecialchars($_SESSION['name'], ENT_COMPAT, 'utf-8');
             } else {
-                return gettext("Guest") 
+                return gettext("Guest")
                     . " [<a href=\"".url."login/index.php\">" . gettext("Log in") . "</a>]";
             }
             break;
@@ -1172,10 +1207,6 @@ function templates_variables_substitute ($param) {
 
         case "url":                
             return url;
-            break;
-        
-        case "sitename":
-            return $CFG->sitename;
             break;
 
         case "metatags":

@@ -86,6 +86,7 @@ if (!empty($action) && logged_on) {
             // Antispam save
         case "admin:antispam:save":
             $antispam = trim(optional_param('antispam'));
+            $antispam = str_replace("&amp;","&",$antispam); //add & characters back in for valid regex
             $d = new StdClass;
             $d->name = 'antispam';
             $d->value = $antispam;

@@ -26,6 +26,11 @@ if (isset($parameter) && $page_owner != -1) {
                 }
             }
             break;
+        case    "weblog:comment":        
+            if (record_exists('users','ident',$page_owner,'owner',$USER->ident,'user_type','community')) {
+                $run_result = true;
+            }
+            break;
         case     "uploadicons":
             if (record_exists('users','ident',$page_owner,'owner',$USER->ident,'user_type','community')) {
                 $run_result = true;

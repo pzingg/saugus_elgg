@@ -9,7 +9,9 @@ if (logged_on && run("users:flags:get", array("admin", $USER->ident))) {
         $run_result .= "<h2>" . gettext("Site statistics") . "</h2>";
     
     // Number of users of each type
-    if ($users = count_users()) {
+    if ($users = get_records_sql('SELECT user_type, count(ident) AS numusers 
+                                  FROM '.$CFG->prefix.'users 
+                                  GROUP BY user_type')) {
         foreach($users as $user) {
             
             $run_result .= templates_draw(array(

@@ -15,6 +15,13 @@ switch ($action) {
             $post->posted = time();
             $post->owner = $USER->ident;
             $post->weblog = $page_owner;
+            
+            //update file access to match post content
+            if ($CFG->file_auto_promote) {
+	            preg_match_all("/\{\{file:([0-9]+)\}\}/i",$post->body,$matches);
+	            if (!empty($matches)) run("files:access:update",array($matches[1],$post));
+            }
+      
             $insert_id = insert_record('weblog_posts',$post);
             $value = trim(optional_param('new_weblog_keywords'));
             insert_tags_from_string ($value, 'weblog', $insert_id, $post->access, $post->owner);
@@ -46,6 +53,13 @@ switch ($action) {
             
             if (!empty($exists)) {
                 update_record('weblog_posts',$post);
+                
+	            //update file access to match post content
+	            if ($CFG->file_auto_promote) {
+		            preg_match_all("/\{\{file:([0-9]+)\}\}/i",$post->body,$matches);
+		            if (!empty($matches)) run("files:access:update",array($matches[1],$post));
+	            }
+	            
                 delete_records('tags','tagtype','weblog','ref',$post->ident);
                 $value = trim(optional_param('edit_weblog_keywords'));
                 insert_tags_from_string ($value, 'weblog', $post->ident, $post->access, $oldpost->owner);
@@ -111,11 +125,12 @@ switch ($action) {
         if (!empty($comment->post_id) && !empty($comment->body) && !empty($comment->postedname)) {
             $where = run("users:access_level_sql_where",$USER->ident);
             if ($post = get_record_select('weblog_posts','('.$where.') AND ident = '.$comment->post_id)) {
-                if (run("spam:check",$comment->body) != true) {
+                if ((run("spam:check",$comment->body) != true) && (run("spam:check",$comment->postedname) != true)) {
                     // If we're logged on or comments are public, add one
                     if (logged_on || run("users:flags:get",array("publiccomments",$post->owner))) {
                         $comment->owner = $USER->ident;
                         $comment->posted = time();
+                        $comment->access = optional_param('edit_comment_access');
                         insert_record('weblog_comments',$comment);
 
                         // If we're logged on and not the owner of this post, add post to our watchlist
@@ -130,15 +145,17 @@ switch ($action) {
                         // Email comment if applicable
                         if (run("users:flags:get",array("emailreplies",$post->owner))) {
                             if ($email = get_record('users','ident',$post->owner)) {
-                                $username = $email->username;
-                                $message = gettext(sprintf("You have received a comment from %s on your blog post '%s'. It reads as follows:", $comment->postedname, stripslashes($post->title)));
-                                $message .= "\n\n\n" . stripslashes($comment->body) . "\n\n\n";
-                                $message .= gettext(sprintf("To reply and see other comments on this blog post, click here: %s", url . $username . "/weblog/" . $post->ident . ".html"));
-                                $message = wordwrap($message);
-                                $from = new StdClass;
-                                $from->email = $CFG->noreplyaddress;
-                                $from->name = $comment->postedname;
-                                email_to_user($email,$from,stripslashes($post->title),$message);
+                            	if ($email->owner == -1 || $USER->owner == -1) {  //only send emails to/from regular users, not owned users
+	                                $username = $email->username;
+	                                $message = gettext(sprintf("You have received a comment from %s on your blog post '%s'. It reads as follows:", $comment->postedname, stripslashes($post->title)));
+	                                $message .= "\n\n\n" . stripslashes(html_entity_decode(strip_tags($comment->body),ENT_QUOTES)) . "\n\n\n";
+	                                $message .= gettext(sprintf("To reply and see other comments on this blog post, click here: %s", url . $username . "/weblog/" . $post->ident . ".html"));
+	                                $message = wordwrap($message);
+	                                $from = new StdClass;
+	                                $from->email = $CFG->noreplyaddress;
+	                                $from->name = $comment->postedname;
+	                                email_to_user($email,$from,stripslashes($post->title),$message);
+                            	}
                             }
                         }
                         $messages[] = gettext("Your comment has been added."); // gettext variable
@@ -162,6 +179,39 @@ switch ($action) {
             if ($commentinfo->owner == $USER->ident || run("permissions:check", "weblog")) {
                 delete_records('weblog_comments','ident',$comment_id);
                 $messages[] = gettext("Your comment was deleted.");
+            }
+            $redirect_url = url . run("users:id_to_name",$commentinfo->postowner) . "/weblog/" . $commentinfo->postid . ".html";
+            define('redirect_url',$redirect_url);
+        }
+        break;
+        
+     // Make a weblog comment public
+    case "weblog_comment_public":
+        $comment_id = optional_param('weblog_comment_public');
+        if (logged_on && !empty($comment_id)) {
+            $commentinfo = get_record_sql('SELECT wc.*,wp.owner AS postowner,wp.ident AS postid
+                                           FROM '.$CFG->prefix.'weblog_comments wc 
+                                           LEFT JOIN '.$CFG->prefix.'weblog_posts wp ON wp.ident = wc.post_id
+                                            WHERE wc.ident = ' . $comment_id);
+            if ($commentinfo->owner == $USER->ident || run("permissions:check", "weblog")) {
+                set_field('weblog_comments','access','PUBLIC','ident',$comment_id);
+                $messages[] = gettext("Your comment was made public.");
+	            
+	            if ($post = get_record_select('weblog_posts','ident = '.$commentinfo->post_id)) {
+		        	if (run("users:flags:get",array("emailreplies",$post->owner))) {
+		                if ($email = get_record('users','ident',$post->owner)) {
+		                    $username = $email->username;
+		                    $message = gettext(sprintf("You have received a comment from %s on your blog post '%s'. It reads as follows:", $commentinfo->postedname, stripslashes($post->title)));
+		                    $message .= "\n\n\n" . stripslashes(html_entity_decode(strip_tags($commentinfo->body),ENT_QUOTES)) . "\n\n\n";
+		                    $message .= gettext(sprintf("To reply and see other comments on this blog post, click here: %s", url . $username . "/weblog/" . $post->ident . ".html"));
+		                    $message = wordwrap($message);
+		                    $from = new StdClass;
+		                    $from->email = $CFG->noreplyaddress;
+		                    $from->name = $comment->postedname;
+		                    @email_to_user($email,$from,stripslashes($post->title),$message);
+		                }
+		            }
+	            }
             }
             $redirect_url = url . run("users:id_to_name",$commentinfo->postowner) . "/weblog/" . $commentinfo->postid . ".html";
             define('redirect_url',$redirect_url);

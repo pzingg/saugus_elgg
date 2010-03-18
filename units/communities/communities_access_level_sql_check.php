@@ -14,7 +14,8 @@ if (logged_on) {
             $communitieslist[] = $community->ident;
         }
     }
-    if ($communities = get_records('users','owner',$USER->ident)) {
+    
+    if ($communities = get_records_select('users','owner = '.$USER->ident.' AND user_type = \'community\'',null,null)) {
         foreach($communities as $community) {
             $communitieslist[] = $community->ident;
         }

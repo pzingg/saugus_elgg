@@ -18,6 +18,7 @@
 
     // Grab title, see if we can edit the template
         $editable = 0;
+        $templatepublic = false; //current template public availability
         if ($template_id == -1) {
             $templatetitle = gettext("Default Theme");
         } else {
@@ -28,6 +29,9 @@
             }
             if (($templatestuff->owner != $_SESSION['userid']) && ($templatestuff->public != 'yes')) {
                 $template_id = -1;
+            }
+            if ($templatestuff->public == 'yes') {
+            	$templatepublic = true;
             }
         }
     
@@ -99,6 +103,24 @@ END;
     
     if ($editable) {
         $save = gettext("Save"); // gettext variable
+        //only admins can make templates public
+        if (run("users:flags:get", array("admin", $_SESSION['userid']))) {
+        	if ($templatepublic) {
+		        $run_result .= templates_draw(array(
+		                                                'context' => 'databoxvertical',
+		                                                'name' => gettext("Public"),
+		                                                'contents' => "<label><input type=\"radio\" name=\"templatepublic\" value=\"yes\" checked=\"checked\" /> " . gettext("Yes") . "</label> <label><input type=\"radio\" name=\"templatepublic\" value=\"no\" /> " . gettext("No") . "</label>"
+		                                            )
+		                                            );
+	        } else {
+	        	$run_result .= templates_draw(array(
+	                                                'context' => 'databoxvertical',
+	                                                'name' => gettext("Public"),
+	                                                'contents' => "<label><input type=\"radio\" name=\"templatepublic\" value=\"yes\" /> " . gettext("Yes") . "</label> <label><input type=\"radio\" name=\"templatepublic\" value=\"no\" checked=\"checked\" /> " . gettext("No") . "</label>"
+	                                            )
+	                                            );
+	        }
+        }
         $run_result .= <<< END
     
         <p align="center">

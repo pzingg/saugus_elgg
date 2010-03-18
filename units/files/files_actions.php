@@ -62,6 +62,7 @@ if (logged_on) {
                 $f->files_owner = $page_owner;
                 $f->folder =  $folderid;
                 $f->originalname = $um->get_original_filename();
+                if (empty($title)) $title = $um->get_original_filename();
                 $f->title = $title;
                 $f->description = $description;
                 $f->location = $reldir.'/'.$um->get_new_filename();

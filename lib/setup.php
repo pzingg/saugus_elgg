@@ -24,22 +24,8 @@ if (!empty($_SERVER['HTTP_X_moz']) && $_SERVER['HTTP_X_moz'] === 'prefetch'){
     exit;
 }
 
-// Set defaults for some variables
-
 if (empty($CFG->debug)) {
     $CFG->debug = 0;
-}
-if (empty($CFG->publicinvite)) {
-    $CFG->publicinvite = $CFG->publicreg;
-}
-if (empty($CFG->emailfilter)) {
-    $CFG->emailfilter = "";
-}
-if (empty($CFG->maxusers)) {
-    $CFG->maxusers = 0;
-}
-if (empty($CFG->walledgarden)) {
-    $CFG->walledgarden = 0;
 }
 
 $CFG->libdir = $CFG->dirroot . 'lib';
@@ -322,7 +308,6 @@ require_once($CFG->dirroot . "lib/displaylib.php");
 ////// Init templating basics
 //////
 if (!isset($CFG->templatestore)) { $CFG->templatestore = 'db' ;}
-if (!isset($CFG->templatesroot)) { $CFG->templatesroot = $CFG->wwwroot . "_templates/";}
 if (!isset($PAGE->menu       )) { $PAGE->menu        = array();}
 if (!isset($PAGE->menu_sub   )) { $PAGE->menu_sub    = array();}
 if (!isset($PAGE->menu_top   )) { $PAGE->menu_top    = array();}

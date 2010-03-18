@@ -7,6 +7,7 @@ if (isset($parameter)) {
     global $post_authors;
     global $individual;
     global $CFG;
+    global $USER;
     
     //if (!isset($post_authors[$post->owner])) {
         
@@ -77,8 +78,8 @@ if (isset($parameter)) {
         if ($post_authors[$post->owner]->icon == -1) {
             $usericon = $post_authors[$post->weblog]->icon;
         }
-
-        $fullname .= " @ " . $post_authors[$post->weblog]->fullname;
+		
+		$fullname .= " @ " . $post_authors[$post->weblog]->fullname;
         $username = run("users:id_to_name",$post->weblog);
     }
     
@@ -98,7 +99,7 @@ if (isset($parameter)) {
             </div>
 END;
     }
-    // if ($post->owner == $_SESSION['userid'] && logged_on) {
+     //if ($post->owner == $_SESSION['userid'] && logged_on) {
     if (run("permissions:check",array("weblog:edit",$post->owner))) {
         $Edit = gettext("Edit");
         $returnConfirm = gettext("Are you sure you want to permanently delete this weblog post?");
@@ -115,68 +116,49 @@ END;
 END;
     }
     
-    if (!isset($_SESSION['comment_cache'][$post->ident]) || (time() - $_SESSION['comment_cache'][$post->ident]->created > 120)) {
-        $numcomments = count_records('weblog_comments','post_id',$post->ident);
-        $_SESSION['comment_cache'][$post->ident]->created = time();
-        $_SESSION['comment_cache'][$post->ident]->data = $numcomments;
-    }
-    $numcomments = $_SESSION['comment_cache'][$post->ident]->data;
+//	Can't use comment cache now that we're handling access controls
+//    if (!isset($_SESSION['comment_cache'][$post->ident]) || (time() - $_SESSION['comment_cache'][$post->ident]->created > 120)) {
+//        $numcomments = count_records('weblog_comments','post_id',$post->ident);
+//        $_SESSION['comment_cache'][$post->ident]->created = time();
+//        $_SESSION['comment_cache'][$post->ident]->data = $numcomments;
+//    }
+//    $numcomments = $_SESSION['comment_cache'][$post->ident]->data;
     
-    $comments = "<a href=\"".url.$username."/weblog/{$post->ident}.html\">$numcomments $anyComments</a>";        
+    $where = run("users:access_level_sql_where",$_SESSION['userid']);
+    if (logged_on && $USER->owner != -1 && $post->owner == $USER->ident) $where .= " or owner=" . $USER->owner . " ";
+    if (logged_on && $USER->owner == -1 && $CFG->owned_users_allaccess && get_field("users","owner","ident",$post->owner) != -1)
+    	$where .= " or 0=0 ";
+    $numcomments = count_records_select('weblog_comments','('.$where.') AND post_id = '.$post->ident);
+    
+    $comments = "<a href=\"".url.$username."/weblog/{$post->ident}.html\">$numcomments $anyComments</a>";
+    
+    //add the nifty Add This button to the info bar under each post, if enabled in the config file
+    $addthis_button = "";  
+    if ($CFG->addthis_enabled) {
+    $post_url = url.$username."/weblog/".$post->ident.".html";
+    $post_title = str_replace("'", "\\'", $title);
+    $addthis_button = <<< END
+<!-- ADDTHIS BUTTON BEGIN -->
+<script type="text/javascript"> 
+addthis_logo_background = 'EFEFFF';
+addthis_logo_color      = '666699';
+addthis_options         = 'favorites, email, digg, delicious, myspace, facebook, google, live, myweb, technorati, reddit, stumbleupon, furl, more';
+</script>
+<span class="addthis_button"><a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '$post_url', '$post_title')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s9.addthis.com/button0-share.gif" width="83" height="16" border="0" alt="Share This" /></a></span>
+<script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>
+<!-- ADDTHIS BUTTON END -->
+    
+END;
+
+    }
     
     if (isset($individual) && ($individual == 1)) {
         // looking at an individual post and its comments
-
-        $commentsbody = "";
             
         if ($post->ident > 0) {
             // if post exists and is visible
             
-            if ($comments = get_records('weblog_comments','post_id',$post->ident,'posted ASC')) {
-                foreach($comments as $comment) {
-                    $commentmenu = "";
-                    if (logged_on && ($comment->owner == $_SESSION['userid'] || run("permissions:check", "weblog"))) {
-                        $Edit = gettext("Edit");
-                        $returnConfirm = gettext("Are you sure you want to permanently delete this weblog comment?");
-                        $Delete = gettext("Delete");
-                        $commentmenu = <<< END
-
-                <p>
-                        [<a href="{$CFG->wwwroot}_weblog/action_redirection.php?action=weblog_comment_delete&amp;weblog_comment_delete={$comment->ident}" onclick="return confirm('$returnConfirm')">$Delete</a>]
-                </p>
-END;
-                    }
-                    $comment->postedname = htmlspecialchars($comment->postedname, ENT_COMPAT, 'utf-8');
-                    
-                    // turn commentor name into a link if they're a registered user
-                    // add rel="nofollow" to comment links if they're not
-                    if ($comment->owner > 0) {
-                        $commentownerusername = run("users:id_to_name",$comment->owner);
-                        $comment->postedname = '<a href="' . url . $commentownerusername . '/">' . $comment->postedname . '</a>';
-                        $comment->icon = '<a href="' . url . $commentownerusername . '/">' . "<img src=\"" . $CFG->wwwroot . $commentownerusername . "/icons/" . run("icons:get",$comment->owner) . "/w/50/h/50/\" border=\"0\" align=\"left\" alt=\"\" /></a>";
-                        $comment->body = run("weblogs:text:process", array($comment->body, false));
-                    } else {
-                        $comment->icon = "<img src=\"" . $CFG->wwwroot . "_icons/data/default.png\" width=\"50\" height=\"50\" align=\"left\" alt=\"\" />";
-                        $comment->body = run("weblogs:text:process", array($comment->body, true));
-                    }
-                    
-                    $commentsbody .= templates_draw(array(
-                                                          'context' => 'weblogcomment',
-                                                          'postedname' => $comment->postedname,
-                                                          'body' => $comment->body . $commentmenu,
-                                                          'posted' => strftime("%A, %e %B %Y, %R %Z",$comment->posted),
-                                                          'usericon' => $comment->icon
-                                                          )
-                                                    );
-                    
-                }
-                $commentsbody = templates_draw(array(
-                                                     'context' => 'weblogcomments',
-                                                     'comments' => $commentsbody
-                                                     )
-                                               );
-                
-            }
+            $commentsbody = run("weblogs:comments:view",$post);
             
             $run_result .= templates_draw(array(
                                                 'context' => 'weblogpost',
@@ -186,12 +168,14 @@ END;
                                                 'body' => $body,
                                                 'fullname' => $fullname,
                                                 'title' => "<a href=\"".url.$username."/weblog/{$post->ident}.html\">$title</a>",
-                                                'comments' => $commentsbody
+                                                'comments' => $commentsbody,
+            									'commentslink' => $addthis_button
                                                 )
                                           );
             
             if (logged_on || run("users:flags:get",array("publiccomments",$post->owner))) {
-                $run_result .= run("weblogs:comments:add",$post);
+//            	if ($post->access != "PUBLIC" || $USER->owner == -1) //owned users can't comment on public posts' temp fix
+                	$run_result .= run("weblogs:comments:add",$post);
             } else {
                 $run_result .= "<p>" . gettext("You must be logged in to post a comment.") . "</p>";
             }
@@ -223,7 +207,7 @@ END;
                                             'body' => $body,
                                             'fullname' => $fullname,
                                             'title' => "<a href=\"".url.$username."/weblog/{$post->ident}.html\">$title</a>",
-                                            'commentslink' => $comments
+                                            'commentslink' => $comments." | ".$addthis_button
                                             )
                                       );        
     }

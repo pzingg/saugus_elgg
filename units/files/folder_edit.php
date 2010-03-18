@@ -8,7 +8,7 @@ if ($folder != -1) {
     global $folder_name;
     $folder_name = htmlspecialchars($folder_name, ENT_COMPAT, 'utf-8');
     $folder_details = get_record('file_folders','ident',$this_folder->ident);
-    if (run("permissions:check", array("files", $folder_details->owner))  || run("permissions:check", array("files", $folder_details->files_owner))) {
+    if (run("permissions:check", array("files", $folder_details->owner))  || run("permissions:check", array("files:edit", $folder_details->files_owner))) {
         $edit = gettext("Edit this folder"); // gettext variable
         $run_result .= <<< END
     <h3>

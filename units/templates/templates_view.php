@@ -46,6 +46,7 @@ END;
                                                     )
                                                     );
         }
+        
         $templates = get_records('templates','owner',$USER->ident);
         $header2 = gettext("Personal themes"); // gettext variable
         $desc2 = gettext("These are themes that you have created. You can edit and delete these. These theme(s) only control actual look and feel - you cannot change any content here. To change any of your content you need to use the other menu options such as: edit profile, update weblog etc."); // gettext variable

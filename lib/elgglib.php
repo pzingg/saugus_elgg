@@ -3318,7 +3318,11 @@ function adjust_allowed_tags() {
     global $CFG, $ALLOWED_TAGS;
 
     if (!empty($CFG->allowobjectembed)) {
-        $ALLOWED_TAGS .= '<embed><object>';
+        $ALLOWED_TAGS .= '<embed><object><iframe>';
+        //only logged in users can embed scripts
+        if (isloggedin()) {
+        	$ALLOWED_TAGS .= '<script>';
+        }
     }
 }
 
@@ -4091,8 +4095,9 @@ function isadmin($userid=0) {
         return true;
     } else if (in_array($userid, $nonadmins)) {
         return false;
-    } else if (record_exists('user_flags','flag','admin','user_id',$userid)) {
-        $admins[] = $userid;
+    //} else if (record_exists('user_flags','flag','admin','user_id',$userid)) {
+    } else if (get_field('user_flags','value','flag','admin','user_id',$userid)) {
+    	$admins[] = $userid;
         return true;
     } else {
         $nonadmins[] = $userid;

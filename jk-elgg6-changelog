@@ -1,0 +1,403 @@
+******Changes since 0.65.57
+_ownedusers/ajax_action.php: added email notifications for owned users when owner marks comments visible
+units/weblogs/weblogs_actions.php: added email notifications for owned users when owner marks comments visible
+units/weblogs/permissions_check.php: fixed an issue where owned user comments on reg user posts were invisible if reg use didn't own owned user
+units/weblogs/permissions_check.php: adjusted comments access controls to work better with community posts
+units/ownedusers/permissions_check.php: adjusted comments access controls to work better with community posts
+units/communities/permissions_check.php: adjusted comments access controls to work better with community posts
+units/weblogs/weblogs_comments_view.php: adjusted comments access controls to work better with community posts
+
+******Changes since 0.65.56
+profile/edit.php: added tinymce toolbar to the biography field, enabling rich text editing 
+units/display/function_log_on_pane.php: added code so that elgg returns you to the page you were on when you log in (retains context)
+units/files/files_links_make.php: added a login link to the "you don't have permission to access this file" if not logged in
+units/users/function_access_level_check.php: undid a prior rights adjustment for owned users that caused files to be visible in rare combos of security settings
+units/files/files_view.php: updated rights settings so that owned users always see their own files/folders
+units/files/folder_view.php: updated rights settings so that owned users always see their own files/folders
+units/files/files_links_make.php: Updated quicktime movie embed code so that it works better in Firefox on Ubuntu
+_files/preload.mov: modified preload movie for better Ubuntu/Firefox support
+_templates/difference: Added a new clean template
+units/ownedusers/users_move.php: Sort the user list so that large owner lists are manageable
+
+******Changes since 0.65.55
+IMPORTANT! Before installing this update over an existing Elgg install, be sure to delete the _tinymce folder in your existing Elgg root folder
+on your server.
+
+_tinymce: Updated to v3. Supports Safari!!!!! Raft of improvements/fixes/new options. All embeds now seem to work correctly in IE.
+units/weblogs/weblogs_posts_add.php: Removed Safari rich text editor restrictions
+units/weblogs/weblogs_posts_edit.php: Removed Safari rich text editor restrictions
+mod/folio/control/page_edit.php: Removed Safari rich text editor restrictions. Updated TinyMCE tags to v3 and reorged/added buttons. Better multi-lang support
+units/tinymce/tinymce_js.php: Updated TinyMCE tags to v3 and reorged/added buttons.
+
+******Changes since 0.65.54
+units/weblogs/weblogs_posts_add.php: yet another IE vs. TinyMCE bug squashed. Embed box now works in IE
+mod/folio/control/page_edit.php: yet another IE vs. TinyMCE bug squashed. Embed box now works in IE
+
+******Changes since 0.65.53
+units/display/function_output_field_display.php: use local twitter logo, since twitter likes to change sizes
+lib/displaylib.php: use local twitter logo, since twitter likes to change sizes
+_tinymce/jscripts/tiny_mce/plugins/blockquote*: added a blockquote plugin
+units/tinymce/tinymce_js.php: added blockquote button
+units/weblogs/function_html_activate_urls.php: use the actual link address, rather than replacing with "Click to View Link"
+mod/captcha/adler.ttf: copied adler.ttf from mod/catcha/inc into mod/captcha so that WAMP will work properly
+mod/folio/control/page_edit.php: added "<script>" to the allowed tags so that script based embeds (like PollEverywhere) will work
+units/tinymce/tinymce_js.php: added "<script>" to the allowed tags so that script based embeds (like PollEverywhere) will work
+lib/elgglib.php: added "<script>" to the allowed tags so that script based embeds will work. Only logged in users can embed scripts
+
+******Changes since 0.65.52
+units/files/folder_edit.php: fixed permissions problem that prevented editing of folder info in communities
+mod/file/lib.php: fixed permissions so menu options appear for communities user is a member of
+
+******Changes since 0.65.51
+units/templates/templates_edit.php: Added ability to make templates public (sysadmins only)
+units/templates/template_actions.php: Added ability to make templates public (sysadmins only)
+mod/folio/lib.php: Eliminated duplication of sidebar items when context is not an individual user's content
+units/users/function_number_of_users.php: fixed so that number of logged in users actually works
+_files/ScratchApplet.jar: Added v31 of the Scratch player applet for MIT Scratch Projects
+_files/soundbank.gm: sound file for Scratch applet
+units/files/files_links_make.php: added inline player for Scratch files
+lib/filelib.php: added mimetype for Scratch project files, and made send Content-length header, since applets need that
+units/files/files_links_make.php: added inline player support for direct uploaded flash swf files (for Pencil or any other swf generator)
+
+******Changes since 0.65.50
+mod/folio/lib.php: Removed odd default behavior for add of "Wiki Pages" sidebar case that caused a double of user count block on home page when logged out
+mod/folio/users_info_menu.php: fixed wiki page entry in sidebar so that it appears for communities again (oops) 
+
+******Changes since 0.65.49
+mod/folio/control/page_edit.php: backed out source formatting in TinyMCE due to Safari/TinyMCE compat issues
+units/tinymce/tinymce_js.php: backed out source formatting in TinyMCE due to Safari/TinyMCE compat issues
+mod/folio/users_info_menu.php: eliminate wiki pages option in sidebar for owned users, for now 
+
+******Changes since 0.65.48
+units/users/function_access_level_sql_where.php: Fixed an oops with the allaccess setting that allowed owned users to see others' private content
+mod/folio/lib.php: fix owned users restrictions	 on wiki pages and allowed all community members to edit community pages (except owned users, unless access control set to moderated or public). 
+mod/folio/users/info_menu.php: removed bogus module version link
+_folio/view.php: disabled performance timer
+units/ownedusers/permissions_check.php: Fixed so that owners can upload icons for their owned users
+mod/community/lib.php: Adjusted so that "Edit this profile" link only appears when it is supposed to
+mod/folio/control/page_edit.php: fixed embed a file list so that it works properly for communities
+_activity/index.php: changed view recent activity to show activity since last login by default
+_ownedusers/unapproved.php: changed view owneduser activity to show activity since last login by default
+units/admin/admin_userdetails.php: allow owners to change owned users' usernames (need to move to owned users folder instead)
+config-dist.php: Added quotes around "ldap" to eliminate errors in the log
+mod/folio/control/page_edit.php: applied source formatting in TinyMCE
+units/tinymce/tinymce_js.php: applied source formatting in TinyMCE
+units/weblogs/weblogs_actions.php: Strip HTML tags and convert codes to chars for email notifications
+mod/folio/control/tree_getdata.php: fixed reverse sort order in YUI trees
+_templates: added a bunch of sample templates. To create one, copy the text from style.css and shell.html into the appropriate boxes on the create template form in elgg
+
+******Changes since 0.65.47
+Bunches of UI changes for the wikis, including a print option. Improved TinyMCE functionality (rich text data entry boxes.) Added twitter to profiles. Fixed security bug in wiki pages.
+Updated RSS feeds so that they include enclosures for multimedia content (which helps them work with iTunes.) Only the last piece of media embedded in a post will be made the enclosure, since there can only be one per post.
+Existing users with ldap turned on will need to set $CFG->ldap_property = "cn"; to their config file. If that doesn't work, then try $CFG->ldap_property = "uid";
+
+units/weblogs/function_rss_getitems.php: updated to use <category> for tags rather than <dc:subject> in feeds
+units/display/function_output_field_display.php: added twitter username to profiles
+units/display/function_input_field_display.php: added twitter username to profiles
+profile/profile.class.php: added twitter username to profiles
+lib/displaylib.php: added twitter username to profiles
+_folio/view_old.php: fixed security to prevent the world from being able to rewrite a page from the history
+mod/folio/lib.php: fixed rss feeds so that they work with new permissions
+_folio/history.php: changed rss icon to match rest of site
+mod/folio/control/feeds.php: fixed the nav stuff at the top for better rendering
+_folio/feeds.php: changed rss icon to match rest of site
+config-dist.php: added $CFG->ldap_property to allow users to select either cn or uid for queries to pull ldap data on user auto create. Existing installs need to add this option.
+auth/ldap/lib.php: added a $CFG->ldap_property functionality
+htaccess-dist: added a rule for the print function on wiki pages
+_folio/print.php: added a "print view" to wiki pages
+mod/folio/lib.php: added print menu option
+lib/elgglib.php: added iframes to allowed tags so that Google calendars can be embedded
+units/tinymce/tinymce_js.php: added iframes to allowed tags so that Google calendars can be embedded
+units/tinymce/tinymce_js.php: added added resize option so users can make the input box bigger
+mod/folio/control/page_edit.php: updated tinymce to add above changes to wiki pages
+units/weblogs/function_rss_getitems.php: changed weblog body processing to create enclosure for multimedia content types and delete illegal inline players
+units/files/files_links_make_rss.php: added to handle rss content processing, which should be different from regular posts as requirements are different
+units/files/main.php: added a ref to files_links_make_rss.php
+
+******Changes since 0.65.46
+Wiki (folio) functionality now works well, however doesn't have owneduser security support yet, so there will be no wiki pages for owned users. Also added AddThis button option, and made all pictures scale with a link. Be sure to update config.php to add new options. 
+
+units/files/files_links_make.php: makes scaled images a link to a pop-out window of the full sized image.
+units/templates/default_template.php: minor topnav tweak for IE. also added css for the AddThis button
+config-dist.php: added new config option that enables an AddThis button on posts. allows for easy bookmarking and adding to external services.
+units/weblogs/weblogs_posts_view.php: added code to include the AddThis button in the info bar if enabled in the config file
+units/weblogs/function_search.php: added a "view all posts in category" link to page so that all related posts can easily be viewed, rather than 1 user at a time
+units/search/search_suggest_users.php: added icons to the matching users list - prettier and more consistent
+mod/folio/page_info_menu.php: remmed out comment box in sidebar. Plan to move to page bottom for consistency.
+mod/folio/users_info_menu.php: changed out "xml" icon to standard rss icon.
+mod/folio/control/tree.php: fixed sidebar render to match the rest of the sidebar elements (ie ul li)
+mod/folio/lib.php: number of sidebar mods and misc ui related changes
+mod/folio/control/page_edit.php: updated page functionality to match weblogs (embed, file store, etc.) Added more sophisticated gui toolbars to page_body
+_folio/edit.php: Added the sidebar and profile processing back in. Not sure why this was removed as it can generate confusion.
+mod/folio/lib.php: added new access controls for better user flexibility
+mod/folio/control/page_edit_security.php: added new access controls for better user flexibility
+mod/folio/control/page_edit_security_post.php: added new access controls for better user flexibility
+_folio/edit.php: changed the title from Folio :: to Wiki ::
+_folio/delete.php: changed the title from Folio :: to Wiki ::
+mod/folio/config.php: changed default to VIEW_ONLY for new pages
+mod/folio/lib.php: fix for permissions check on new home pages.
+
+******Changes since 0.65.45
+Release updates View [owneduser] Activity screen to significantly reduce time required to clear comments in busy environs. This release also adds functionality for large environments, where you want any regular user to be able to control any owned user's content (like a high school with lots of teachers and classes). Be sure to update config files on existing installs to add new option (see config-dist.php.)
+
+View Activity Improvements:
+_ownedusers/action_redirection: updated to maintain the current search criteria on "View [owneduser] Activity" screen (last week, last month, etc) when making comments visible (saves a step)
+_ownedusers/unapproved: updated to maintain search criteria
+_ownedusers/ajax_action.php: first run ajax actions for updating comment visibility on the "View [owneduser] Activity" screen
+_ownedusers/ajaxscript.js: first run ajax actions for updating comment visibility on the "View [owneduser] Activity" screen
+_ownedusers/unapproved: updated to add ajax functionality. currently assumes ajax support (which may be a bad thing - need to fix)
+units/users/function_access_level_sql_where.php: fixed a problem that prevented admins from seeing the results of searches on tags
+
+Code that adds access to all owned user content by regular users:
+config-dist.php: added $CFG->owned_users_allaccess option to turn this feature on (off by default)
+units/users/function_access_level_sql_where.php: added code to handle $CFG->owned_users_allaccess functionality
+units/ownedusers/permissions_check.php: fixed permissions to handle $CFG->owned_users_allaccess functionality
+units/users/function_access_level_check.php: fixed access permissions to handle $CFG->owned_users_allaccess functionality
+units/weblogs/permissions_check.php: fixed permissions to handle $CFG->owned_users_allaccess functionality (comments)
+units/weblogs/weblogs_comments_view.php: fixed permissions to handle $CFG->owned_users_allaccess functionality (comments)
+units/weblogs/weblogs_posts_view.php: fixed permissions to handle $CFG->owned_users_allaccess functionality (comments)
+
+******Changes since 0.65.44
+Primarily adds functionality to auto promote file access rights when a blog post that contains the file is updated. For example, if a file which is private is embedded in a blog post that is public, the file access is automatically updated to public. Be sure to update config files on existing installs to add new option (see config-dist.php.)
+
+units/templates/default_template: General look, feel, and function updates.
+units/display/function_log_on_pane.php: squeezed down so that theme fits on an 800 X 600 display
+units/files/files_actions: Added auto assign of file title if none given.
+units/weblogs/weblogs_actions.php: added a file access control check so that files will automatically have access controls updated to match posts
+units/files/files_access_update.php: new function for file access auto update
+units/files/main.php: added function ref for units/files/files_access_update.php
+config-dist.php: added option to turn file auto promotion on or off (default on). Add this option to any existing install if you want to use.
+
+******Changes since 0.65.43
+First add of folio (wiki) functionality (original code by Nathan Garrett blog at elgg.net/garrettn)
+
+version.php: updated version to trigger db update
+_folio: added folio directory files
+mod/folio: added folio directory files
+lib/db/mysql.php: added folio table defs and auto update code
+lib/db/mysql.sql: added folio table defs
+mod/folio/lib.php: added $CFG->folio check to allow for folio code disable in config.php
+config-dist.php:  added $CFG->folio to allow for folio code enable/disable
+mod/folio/lib.php: removed the sidebar mods for a logged in user viewing their own profile, as they are redundant.
+htaccess-dist: added folio rewrite rules
+mod/folio/user_info_menu.php: removed redundant activity section and took user name out of content section (redundant)
+
+Other miscellaneous changes:
+units/files/files_links_make.php: Added a download link for mp3 files, since the flash player doesn't offer downloads or scrubbing
+units/users/function_access_level_check.php: added code to fix owned users folder viewing and allow admins to see all files.
+units/files/files_links_make.php: Auto scale images to 400 wide, rather than posting just a link.
+_ownedusers/unapproved.php: added a "make visible" link for comments to reduce the click count.
+_ownedusers/action_redirection.php: added function to make comments visible for owners from the activity screen
+units/files/files_links_make.php: added mp4 video type to quicktime embed
+
+******Changes since 0.65.42
+This release removes the "view [owned user] activity" link from all pages but the owner's, as this can be confusing when viewing other owners' sites. Also, fixed a relative path bug in the captcha code that only appeared on some php distros.
+
+units/ownedusers/users_owned.php: removed "View [owned user caption] Activity" link from sidebar unless an owner is logged in and viewing their own profile
+mod/captcha/lib.php: updated path for config.php include, since some php versions don't seem to support current dir includes
+
+******Changes since 0.65.41
+This release largely fixes comment access control problems on community (ie group) posts and adds the ability for owned users to see private comments created by the owner on their posts
+
+units/weblogs/weblogs_comments_add.php: added param to call for access_level_select to fix comment visibility on community (ie group) blog posts
+units/users/function_access_level_select.php: fixed for proper function with comment visibility on posts within community (ie group) blog posts
+units/weblogs/weblogs_comments_view.php: fixed rights so that owned user comments on community blogs can be managed by the owner
+units/weblogs/permissions_check.php: added criteria that allows any comments added by an owner to an owned user's post visible to the owned user without being designated "Public"
+units/weblogs/weblogs_comments_view.php: updated comment query to include any comments created by an owner on an owned user's post
+units/weblogs/weblogs_posts_view.php: updated comment count to include comments by owners on owned users' posts
+_activity/index.php: added private comments by an owned user's owner to the list of recent activity
+
+
+******Changes since 0.65.40
+This release added a number of UI improvements and cleaned up the weblog post screen, adding an "Embed" box for external content
+
+units/templates/default_template.php: changed link default color to something more obvious and visible
+units/weblogs/weblogs_posts_edit.php: fixed keyword field so that keywords appear for admins and owners on a post edit
+units/weblogs/weblogs_posts_edit.php: moved file embed popup to a more logical place on the form
+units/weblogs/weblogs_posts_add.php: moved file embed popup to a more logical place on the form
+units/files/main.php: changed file embed form functions (weblogs:posts:add:fields) so that the file embed popup can be in a more logical place on the form.
+_timymce/jscripts/tiny_mce/plugins/flash/editor_plugin.js: fixed flash plugin so that it supports newer flashvars param for embeds
+units/weblogs/weblogs_posts_edit.php: added embed box for embedding external objects (excluded Safari, since tinymce no worky)
+units/weblogs/weblogs_posts_add.php: added embed box for embedding external objects (excluded Safari, since tinymce no worky)
+units/templates/default_template.php: added css for embed box
+units/tinymce/tinymce_js.php: added an exclusion for Safari, since tiny MCE no worky with Safari
+
+
+******Changes since 0.65.39
+This release added a placeholder in the content box for a weblog post with embedded flash content
+
+units/tinymce/tinymce_js.php: added flash plugin and fixed settings so flash embeds appear inside the editor and are easier to visualize
+_activity/index.php: fixed right so that regular users see all their comments, regardless of privacy settings.
+
+******Changes since 0.65.38
+Added captcha code for comments, updated terms and usage guidelines, improved rendering/performance of Apple media types, enabled external object embedding
+
+lib/filelib.php: added mime type for m4a
+units/files/files_links_make.php: created embeds for quicktime file types
+_files/preload2.mov: added preload movie for embed tags
+_files/preload-audio.mov: added preload clip for audio embed tags to prevent load delays
+content/mainindex/content_main_privacy.php: fixed site link and syntax issues
+content/mainindex/content_main_terms.php: formatting and text changes
+content/mainindex/content_main_guidelines: added
+content/mainindex/main.php: added guidelines func ref
+content/guidelines.php: added page code for site guidelines
+units/templates/default_template.php: added the content guidelines link to the footer
+mod/captcha: added (modified) captcha code (modified version of original code from Rolando Espinoza La Fuente on elgg.org)
+units/admin/spam_check.php: added captcha check function
+units/weblogs/weblogs_comments_add.php: added code for captcha
+units/tinymce/tinymce_js.php: added object and embed tags to the allowed tags
+includes.php: moved constants.php up to load prior to setup.php so that $ALLOWED_TAGS gets initialized BEFORE adjust_allowed_tags() gets called. Fixes the $CFG->allowobjectembed option in config.php
+
+
+******Changes since 0.65.37
+Disabled owned user ability to edit templates and fixed tinymce so that the GUI editor works reliably in IE
+
+units/templates/templates_add.php: owned users can't create their own templates.
+units/tinymce/tinymce_js.php: Band aid to make TinyMCE work in IE. Looks like there's a problem with TinyMCEs tiny_mce_gzip.php file, so went straight to the script.
+
+
+******Changes since 0.65.36
+lib/db/mysql.sql: fixed some mysql v5 glitches in table declarations for friends_requests, feed_posts, feed_subscriptions, feeds
+units/ownedusers/users_owner_of.php: fixed an oops with the owner user id
+
+******Changes since 0.65.35
+Move owned users:
+_ownedusers/moveownedusers.php: created
+units/ownedusers/users_move.php: created
+units/ownedusers/main.php: added ownedusers:move page ref
+units/ownedusers/users_owner_of.php: added move option to student list and fixed submenu so that it only appears for owner/admin acct
+units/ownedusers/users_actions: added actual move logic
+
+Misc:
+units/weblogs/function_rss_getitems.php: added dc:creator tag to weblog feeds
+
+******Changes since 0.65.34
+units/weblogs/weblogs_init.php: fixed rss feed link generated for the all posts listing.
+units/weblogs/function_rss_getitems.php: adjusted to add More tag functionality.
+units/weblogs/weblogs_actions.php: added spam check on posted name as well as body of comment, to catch those who post urls only
+units/admin/admin_actions.php: fixed admin:antispam:save so that it converts &amp; back to an & character on a save
+units/admin/admin_spam.php: fixed form "regular expressions" data so that it shows "&" symbols, rather than "&amp;" for & in a regex
+units/users/function_access_level_sql_where.php: fixed so that admin users can see all posts, including private
+units/admin/spam_check.php: added code that checks comments for excessive links
+units/tinymce/tinymce_js.php: added a more button to insert the more tag.
+_tinymce/jscripts/tiny_mce/plugins/elggmore: folder and code added for more button.
+
+******Changes since 0.65.33 (oops - skipped a number):
+profile/profile.class.php: fixed field display function so that it always displays profile fields to the profile owner.
+units/users/function_access_level_check.php: removed 0.65 change (below) which inadvertently made visible profile fields for all users with the same owner, regardless of acl
+
+
+******Changes since 0.65.31:
+
+units/ownedusers/permissions_check.php: added ability to modify file info for owned users
+auth/ldap/lib.php: added code for ldap_protocol_version
+config-dist.php: added config option for $CFG->ldap_protocol_version
+config-dist.php: added config option $CFG->owned_users to global enable/disable owned users
+mod/ownedusers/lib.php: check for $CFG->owned_users before changing menu options
+_files/download.php: added header("Pragma: private") to work around stinking Internet Exploder and it pathetically lousy code! (IE shouldn't honor Pragma, as this is specifically for proxy servers.)
+mod/ldap: folder added to include ldap server admin panel
+mod/ldap/lib.php: added to enable ldap mgmt
+_admin/ldap: added - ldap server list
+units/ldap: folder created
+units/ldap/main.php: define ldap functions
+units/ldap/admin_ldap: main ldap list panel
+units/ldap/ldap_actions: ldap server record management functions
+includes.php: added require statement for units/ldap/main.php
+units/ldap/function_list_servers.php: added to create server list pop-up under logon pane - no worky, see comments
+units/display/function_log_on_pane.php: added code to generate ldap server list pop-up
+units/weblogs/weblogs_text_process.php: re-enabled {{more}} tag processing
+units/users/content_main_index.php: restored original functionality. New version sucked.
+
+******Changes since 0.65.3:
+
+htaccess-dist: fixed RSS rewrites so that they work w/ Apache 1.3
+
+******Changes since 0.65.2:
+
+Comments Access Control:
+units/weblogs/weblogs_comments_view.php: added to gen comments list
+units/weblogs/weblogs_posts_view.php: removed comments list gen code and moved to weblogs_comments_view.php
+units/weblogs/main.php: added reference to weblogs_comments_view
+units/weblogs/weblogs_comments_add.php: added access control pop-up to form
+units/weblogs/weblogs_actions.php: added access to weblogs:comment:add (insert record)
+units/weblogs/permissions_check.php: added permission checking for comments
+units/weblogs/weblogs_posts_view.php: changed the comment counter so that it works w/ access controls
+units/users/function_access_level_select.php: Changed to allow public commentors to choose whether they want the comment to be public or private
+_activity/index.php: added comment access controls to recent activity screen
+_ownedusers/unapproved.php: added moderated comments to the student activity list
+units/weblogs/weblogs_actions.php: added a function to make a comment public
+version.php: bumped the version so sanity check will work and add access column to comments
+lib/db/mysql.sql: added access column to weblog_comments
+lib/db/mysql.php: added upgrade database code to add access column to existing installations.
+units/weblogs/weblogs_actions.php: disabled email notifications for owned users
+
+Owned Users (since mod_users 0.13):
+units/ownedusers/permissions_check.php: added moderator right to delete comments
+units/communities/communities_access_level_sql_check.php: fixed query so that it returns only communities, and not owned users
+units/ownedusers/permissions_check.php: made userdetails:change work right
+
+LDAP Auth:
+auth/ldap/lib.php: debug options to ldap_start_tls line so that errors aren't thrown on failed connect
+
+Misc Changes:
+lib/elgglib.php: fixed isadmin function so that Administration link only appears for admin users
+units/users/userdetails_edit.php: fixed global public comments error that kept users setting from appearing
+
+MySQL Table Changes:
+added access column to weblog_comments
+
+******Changes since 0.65.1:
+
+LDAP Auth:
+login/index.php: removed md5 function on password because it breaks non-md5 auth methods
+auth/internal/lib.php: added md5 function to password here, where it belongs
+auth/ldap/: directory and lib.php added for ldap auths
+config-dist.php: added a variety of config variable for ldap auths
+
+Owned Users (since mod_users 0.12):
+units/ownedusers/permissions_check.php: discovered that user 1 was the only user who could edit owned user data. Fixed.
+mod/ownedusers/lib.php: updated to add profile editing back in.
+
+Misc Changes:
+units/templates/default_template.php: fixed link to home page in header (double slashes)
+units/templates/templates_preview.php: fixed url for leaves image
+lib/db/mysql.sql: fixed template urls
+lib/db/postgres7.sql: fixed template urls
+
+******Changes since 0.65:
+
+Owned Users (since mod_users 0.11):
+units/users/function_access_level_check.php: added $usernum == $USER->owner to cover owned users, so folders, profiles, etc. work properly for owned users.
+
+Owned Users (from mod_users 0.11):
+units/users/function_access_level_select.php: added forced private to access control pop-up for owned users
+config-dist.php: added $CFG->owned_users_caption = 'Students';
+includes_system.php: added include($CFG->dirroot . "units/ownedusers/main.php");
+.htaccess: added rewrite rules for owned users
+_ownedusers/: folder and module files added
+mod/ownedusers/: folder and lib.php file added
+units/ownedusers/: folder and module files added
+
+System-wide Enable/Disable:
+config-dist.php: added $CFG->public_comments to enable/disable public comments system wide
+units/users/userdetails_edit.php: removed public comments option if $CFG->public_comments = false
+config-dist.php: added $CFG->remember_login_option to enable/disable remember login checkbox
+config-dist.php: added $CFG->forgotten_password_link to enable/disable forgotten password link
+units/display/function_log_on_pane.php: added code to effect remember_login_option and forgotten_password_link above
+config-dist.php: added $CFG->resources_enabled to enable/disable feed aggregation (Your Resources)
+mod/newsclient/lib.php: added code to effect resources_enabled
+includes_system.php: added code to effect resources_enabled
+units/templates/default_template.php: added code to effect resources_enabled
+_rss/styles.php:  added code to effect resources_enabled
+config-dist.php: added $CFG->foaf_enabled to enable/disable foaf links system wide
+mod/friend/lib.php: added code to effect foaf_enabled
+profile/profile.class.php: added code to function display_form to effect foaf_enabled
+
+Misc Changes:
+units/weblogs/weblogs_friends_view.php: eliminated owner posts from friends blog list
+units/templates/default_template.php: fixed search form so that it works properly w/ url
+content/mainindex/content_loggedout.php: fixed so that it no longer offers "why not register for an account" link if $CFG->publicreg is false
+_rss/styles.php: added code to create an itunes subscribe link
+_templates/itunesbadge.gif: added for itunes subscribe in stylesheet
+mod/blog/lib.php: removed page help submenu if not logged on, since it is irrelevant
+

@@ -18,8 +18,7 @@ switch ($action) {
          $invite->name = trim(optional_param('invite_name'));
          $invite->email = trim(optional_param('invite_email'));
          if (!empty($invite->name) && !empty($invite->email)) {
-             if (logged_on || ($CFG->publicinvite == true)) {
-                 if (($CFG->maxusers == 0 || (count_users('person') < $CFG->maxusers))) {
+             if (logged_on || $CFG->publicinvite == true) {
                  if (validate_email(stripslashes($invite->email))) {
                      $strippedname = stripslashes($invite->name); // for the message text.
                      $invitations = count_records('invitations','email',$invite->email);
@@ -60,13 +59,8 @@ switch ($action) {
                      $messages[] = gettext("Invitation failed: The email address was not valid.");
                  }
              } else {
-                 $messages[] = gettext("Error: This community has reached its maximum number of users.");
-             }
-             } else {
-                 $messages[] = gettext("Invitation failed: you are not logged in.");
-             }
-         } else {
                  $messages[] = gettext("Invitation failed: you must specify both a name and an email address.");
+             }
          }
          break;
          // Join using an invitation
@@ -78,9 +72,6 @@ switch ($action) {
          $password1 = trim(optional_param('join_password1'));
          $password2 = trim(optional_param('join_password2'));
          if (isset($name) && isset($code)) {
-             if (($CFG->maxusers == 0 || (count_users('person') < $CFG->maxusers))) {
-                 $messages[] = gettext("Unfortunately this community has reached its account limit and you are unable to join at this time.");
-             }
              if (empty($over13)) {
                  $messages[] = gettext("You must indicate that you are at least 13 years old to join.");
                  break;

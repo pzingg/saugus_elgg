@@ -6,11 +6,9 @@ global $USER;
 
 global $page_owner;
 
-// Only logged in admins can do this! For obvious reasons. Also, you may not perform
-// these actions on yourself.
+//Owners can change user names
 
-if (logged_on && run("users:flags:get", array("admin", $USER->ident)) && $page_owner != $USER->ident) {
-            
+if (logged_on && $page_owner != $USER->ident && (record_exists('users','ident',$page_owner,'owner',$USER->ident,'user_type','person') || run("users:flags:get", array("admin", $USER->ident)))) {
     // Get user details
     $user_details = get_record('users','ident',$page_owner);
     
@@ -25,6 +23,28 @@ if (logged_on && run("users:flags:get", array("admin", $USER->ident)) && $page_o
                                       );
         
     }
+}
+
+// Only logged in admins can do this! For obvious reasons. Also, you may not perform
+// these actions on yourself.
+
+if (logged_on && run("users:flags:get", array("admin", $USER->ident)) && $page_owner != $USER->ident) {
+
+// this was moved up so that owners can change their users' names
+//    // Get user details
+//    $user_details = get_record('users','ident',$page_owner);
+//    
+//    if ($user_details->username != "news") {
+//        
+//        $run_result .= "<h3>" . gettext("Change username:") . "</h3>";
+//        $run_result .= templates_draw(array(
+//                                            'context' => 'databox',
+//                                            'name' => gettext("New username: "),
+//                                            'column1' => "<input type=\"text\" name=\"change_username\" value=\"".$user_details->username."\" />"
+//                                            )
+//                                      );
+//        
+//    }
     
     $run_result .= "<h3>" . gettext("Change file quota (in bytes):") . "</h3>";
     $run_result .= templates_draw(array(
