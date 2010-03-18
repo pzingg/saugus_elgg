@@ -57,7 +57,7 @@ function blog_pagesetup() {
                                     'html' => "<a href=\"{$CFG->wwwroot}_weblog/everyone.php\">"
                                     . gettext("View all posts") . '</a>'); 
         
-        $PAGE->menu_sub[] = array ( 'name' => 'blog:help',
+        if (logged_on) $PAGE->menu_sub[] = array ( 'name' => 'blog:help',
                                     'html' => "<a href=\"{$CFG->wwwroot}help/blogs_help.php\">"
                                     . gettext("Page help") . '</a>'); 
 
