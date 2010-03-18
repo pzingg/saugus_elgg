@@ -94,4 +94,53 @@ RewriteRule ^([A-Za-z0-9]+)\/calendar\/communities\/?$ _calendar/index.php?conte
 RewriteRule xml-rpc.php _rpc/RPC2.php
 RewriteRule mt/mt-xmlrpc.cgi _rpc/RPC2.php
 
+#owned users plugin
+RewriteRule ^([A-Za-z0-9]+)\/weblog\/ownedusers\/?$ _ownedusers/ownedusers.php?weblog_name=$1
+ReWriteRule ^([A-Za-z0-9]+)\/weblog\/ownedusers\/skip=([0-9]+)$ _ownedusers/ownedusers.php?weblog_name=$1&weblog_offset=$2
+
+#----------------------------------------------------------------------------------------------------
+# Rules for the Wiki Folio add-in
+#----------------------------------------------------------------------------------------------------
+#
+# Rewrite page path to make view.php?user=bob&page=Hi to \bob\page\hi
+#	Need to have the /whatever ones first, as the generic pattern
+#	will match things with a / char.
+
+# Archived Pages
+#   For archived pages, pull up via page_ident & created_ident, as page title uniqueness 
+#   is only guaranteed for newest=1 pages.
+RewriteRule ^([A-Za-z0-9]+)\/page\/([0-9]+)\:([0-9]+)/revert$ _folio/view_old.php?user=$1&page_ident=$2&created=$3&revert=T [L]
+RewriteRule ^([A-Za-z0-9]+)\/page\/([0-9]+)\:([0-9]+)$ _folio/view_old.php?user=$1&page_ident=$2&created=$3 [L]
+#   I don't want history pages pulled up via pagenames.  See above note.
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)\:([0-9]+)$ [R=404]
+
+# Regular Pages
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)/history$ _folio/history.php?user=$1&page=$2
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)/addpage$ _folio/edit.php?user=$1&page=$2&new=T
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)/edit$ _folio/edit.php?user=$1&page=$2
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)/delete$ _folio/delete.php?user=$1&page=$2
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)/print$ _folio/print.php?user=$1&page=$2
+
+#   Rewrite so that addresses like elgg/garrettn/page/title/ will generate a 404
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)/$ [R=404]
+RewriteRule ^([A-Za-z0-9]+)\/page\/(.*)$ _folio/view.php?user=$1&page=$2
+
+# Homepage Rule
+RewriteRule ^([A-Za-z0-9]+)\/page\/?$ _folio/view.php?user=$1
+
+# Feeds (shows a single person's actions for the whole world to consume)
+RewriteRule ^([A-Za-z0-9]+)\/subscribe\/([A-Za-z0-9]+)\/([\_\-\+A-Za-z0-9]+)\/([A-Za-z0-9]+:[A-Za-z0-9]+)?$ _folio/feeds.php?user=$1&format=$2&types=$3&tags=all&page=$4&purpose=subscribe&key=$5
+RewriteRule ^([A-Za-z0-9]+)\/subscribe\/([A-Za-z0-9]+)\/([\_\-\+A-Za-z0-9]+)\/([0-9]+)?$ _folio/feeds.php?user=$1&format=$2&types=$3&tags=all&page=$4&purpose=subscribe
+RewriteRule ^([A-Za-z0-9]+)\/subscribe\/([A-Za-z0-9]+)\/([A-Za-z0-9]+:[A-Za-z0-9]+)?$    _folio/feeds.php?user=$1&format=$2&types=all&tags=all&page=1&purpose=subscribe&key=$3
+RewriteRule ^([A-Za-z0-9]+)\/subscribe\/([A-Za-z0-9]+)\/([0-9]+)?$                       _folio/feeds.php?user=$1&format=$2&types=all&tags=all&page=$3&purpose=subscribe
+
+# Activity (shows the activites that are happening to a person for that person to consume)
+RewriteRule ^([A-Za-z0-9]+)\/activity\/([A-Za-z0-9]+)\/([\_\-\+A-Za-z0-9]+)\/([A-Za-z0-9]+:[A-Za-z0-9]+)?$ _folio/feeds.php?user=$1&format=$2&types=$3&tags=all&page=$4&purpose=activity&key=$5
+RewriteRule ^([A-Za-z0-9]+)\/activity\/([A-Za-z0-9]+)\/([\_\-\+A-Za-z0-9]+)\/([0-9]+)?$ _folio/feeds.php?user=$1&format=$2&types=$3&tags=all&page=$4&purpose=activity
+RewriteRule ^([A-Za-z0-9]+)\/activity\/([A-Za-z0-9]+)\/([A-Za-z0-9]+:[A-Za-z0-9]+)?$    _folio/feeds.php?user=$1&format=$2&types=all&tags=all&page=1&purpose=activity&key=$3
+RewriteRule ^([A-Za-z0-9]+)\/activity\/([A-Za-z0-9]+)\/([0-9]+)?$                       _folio/feeds.php?user=$1&format=$2&types=all&tags=all&page=$3&purpose=activity
+
+
+#------------------------------------------------------------------------------------------
+
 </IfModule>
