@@ -1,0 +1,480 @@
+/* Theme Name: difference
+Design Name: difference
+Version: 2.0
+Author: Jim Klein
+Author URI: http://community.saugususd.org/jklein
+*/
+
+/* @group defaults */
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #202020;
+	background: #ffffff;
+	font: 80% Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+a, a:visited {
+	color: #2255AA; 
+	text-decoration: none;
+}
+
+a:hover {
+	color: #7DAE12;
+}
+
+
+a img {
+	border: none;
+}
+
+acronym, abbr {
+	border-bottom: 1px dotted #0c6bf0;
+}
+
+acronym, abbr, span.caps {
+	cursor: help;
+	letter-spacing: .07em;
+}
+
+hr {
+	display: none;
+}
+
+code {
+	font-size: 1em;
+	font-style: italic;
+}
+
+blockquote{
+	margin: 1em;
+	padding: 5px 10px;
+	background: #E8E8E8;
+	border: 1px solid #bcbcbc;
+}
+
+cite {
+	font-size: 0.9em;
+	font-style: normal;
+}
+
+cite a {
+	border-bottom: 1px dotted #DC9204;
+	text-decoration: none;
+}
+
+cite a:visited, a:hover {
+	border-bottom: none;
+}
+
+h2 {
+	margin: 0;
+	padding: 0;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+h3 {
+	margin: 5px 0 0 0;
+	padding: 0;
+	font-size: 1.2em;
+}
+
+p {
+	margin: 0 0 1em;
+	padding: 0;
+	line-height: 1.5em;
+}
+
+/* @group topnav */
+
+#topnav {
+	margin:0;
+	padding:1px;
+	list-style:none;
+	font-size: .9em;
+	font-weight:bold;
+	color:#ffffff;
+	background-color: #346298;
+	width:100%;
+	min-width:780px;
+}
+
+#topnav p {
+	margin:0 2em 0 0;
+	padding:0;
+	float:right;
+}
+
+#topnav ul {
+	padding:0 0 0 2em;
+	margin:2px;
+}
+
+#topnav li {
+	list-style:none;
+	display:inline;
+	padding:0 1em 0 0;
+	margin:0;
+}
+
+#topnav ul li a {
+	text-decoration:none;
+	color:#ffffff;	
+	
+}
+
+#topnav a {
+	color:#fff;	
+	border: none;
+}
+
+#topnav a:hover {
+	background: none;
+	border-bottom: #fff 1px solid;
+}
+
+#topnav a:visited {
+	color:#fff;
+	border: none;
+}
+
+/* @group global_menuoptions */
+
+#global_menuoptions {
+    position:absolute;
+    list-style:none;
+	padding:0;
+	margin:0;
+    margin-left:2em;
+    font-size: .9em;
+}
+
+#global_menuoptions li {
+	list-style:none;
+	display:inline;
+	padding:0 6px 0 0;
+	margin:0;
+}
+
+/* @group header */
+
+#header {
+	margin: 0;
+	padding: 0 0 0 2em;
+	background: #fff url({{url}}_templates/difference/header-bg.gif) repeat-x 1em;
+	height: 110px;
+}
+
+#header h1 {
+	margin: 0;
+	padding: 30px 0 0 0;
+	font-size: 2.4em;
+	word-spacing: 1px;
+	font-weight:normal;
+}
+
+
+#header img {
+	display: block;
+	margin:0 auto;
+	padding: 0;
+}
+
+#header p {
+	margin:0;
+	padding: 0;
+	color: #fff;
+	font-size: 1.1em;
+}
+
+#header a:link, #header a:visited, #header a:hover, #header a:active {
+	color: #c2c2c2;	
+	text-decoration: none;
+	border-bottom: none;
+	background: none;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+#header #share {
+	position:absolute;
+	right: 2em;
+	bottom: 2px;
+	font-size: 90%;
+	font-style:italic;
+}
+
+#separator {
+	position:relative;
+	margin: 0;
+	padding: 0;
+	background: #346298;
+	height: 4px;
+}
+
+
+#contentshell {
+	width:100%;
+	border:none;
+	margin:0;
+	padding:0;
+	background:  #fff;
+}
+
+#contentshell td {
+	vertical-align: top;
+}
+
+/* @group sidebar */
+
+
+#sidebar {
+	margin: 0;
+	padding: 10px;
+	width: 220px;
+	font-size: .9em;
+	background: #fff;
+}
+
+#sidebar h2 {
+	margin: 5px;
+	padding:7px 0 8px 10px;
+	position:relative;
+	
+	background: #FFFFFF url({{url}}_templates/difference/sb-header.gif) no-repeat;
+color: #FFFFFF;
+font-size: 0.9em;
+font-weight: bold;
+text-transform: uppercase;
+/*margin: 0px 0px 5px 0px;
+padding: 3px 0px 3px 10px;*/
+}
+
+#sidebar ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;	
+}
+
+#sidebar ul li {
+	margin: 0 0 10px 0;
+	padding:0px;
+	list-style:none;	
+}
+
+/*#sidebar ul li ul {
+	border-left: 1px solid #d2d2d2;
+	border-right: 1px solid #d2d2d2;
+	border-bottom: 1px solid #d2d2d2;
+}*/
+
+#sidebar #me {
+	padding: 5px;
+	/*border-left: 1px solid #d2d2d2;
+	border-right: 1px solid #d2d2d2;
+	border-bottom: 1px solid #d2d2d2;*/
+}
+
+
+#sidebar li a:link, #sidebar li a:visited {
+	text-decoration: none;
+	border: none;
+	padding: 3px;
+}
+
+#sidebar li a:hover {
+	font-style: underline;
+}
+
+#sidebar ul li #me{
+	margin: 0px;
+	padding-bottom: 1em;
+}
+
+#sidebar li #icon a:hover {
+	border-bottom: none;
+	text-decoration: none;
+}
+
+#sidebar ul li ul {
+	padding: 5px 0 5px 5px;
+}
+
+#sidebar ul li ul li {
+	margin: 0;
+	padding: 5px 0;
+}
+
+/* @group main content */
+
+#system_message {
+	margin: 20px 20px 0 20px;
+	padding: 10px 5px;
+	background-color:#FFFDCA;
+	border:1px solid #F9D42E;
+}
+
+
+#content {
+	padding: 0;
+	color:#403A2E;
+	overflow:hidden;
+	min-height: 780px;
+}
+
+
+#content ul {
+	margin-left: 23px;
+	padding-left: 15px;
+	/*list-style-type: none;*/
+}
+
+/*#content ul li {
+	padding-left: 1.5em;
+}*/
+
+#maincontent_display {
+	margin: 0 0 0.2em;	
+	padding: 1em;
+	/*background-color: #fff;
+	border: 1px solid #d2d2d2;*/
+}
+
+#maincontent_display h1 {
+	margin: 10px 0 0 0;
+	padding-bottom: 5px;
+	font-size: 1.4em;
+	color: #222;
+	font-weight: normal;
+}
+
+#sub_menu {
+	font-size: .9em;
+	margin-bottom: 25px;
+}
+
+.weblog_dateheader {
+	clear:both;
+	text-transform: uppercase; 
+	letter-spacing: 0.1em; 
+	padding: 10px 9px 4px 0; 
+	margin-top: 10px; 
+}
+
+
+.weblog_posts {
+	clear:both;
+	border-bottom: 1px dotted #999999;
+}
+
+.weblog_title h3 {
+    padding:0 0 5px 0px;
+    margin: 12px 0 0 0;
+    letter-spacing: -0.04em; 
+	font-weight: normal;
+	color: #2255AA;
+	font-size: 1.5em;
+	font-family: Times New Roman, Georgia, Trebuchet MS;
+
+}
+
+.post {
+    margin: 0 0 10px 0;
+    padding: 0 0 5px 0px;
+}
+
+.post p {
+    margin-top: 10px;
+}
+
+.post img {
+    margin: 10px
+}
+
+.user {
+	float: left;
+	margin:0;
+	padding:0.5em 1em 1em 0;
+	display:none;
+	color:#D1C3B6;
+	overflow:hidden;
+	width: 90px;
+}
+
+#comments ol, #comments ul {
+    margin: 3px 0 10px 0;
+    padding: 0;
+}
+
+#comments li {
+    margin: 10px 0 10px 30px;
+    line-height: 16px;
+}
+
+#comments ul li {
+    list-style-type: square;
+}
+
+.comment_owner {
+	background-color: #E8E8E8;
+	padding:5px;
+    margin:20px 20px 20px 0;
+   height:50px;
+}
+
+.comment_owner a {
+  color: #222;
+  text-decoration: underline;
+}
+
+.comment_owner img {
+   margin:0px 5px 0px 0px;
+   text-align:left;
+}
+
+/* @group footer */
+
+#footer {
+	position: relative;
+	margin:0;
+	padding: 1.62em 3.75em;
+	clear: both;
+	font-size: 0.9em;
+	color: #c2c2c2;
+	background-color: #346298;
+	text-align:center;
+	height: 20px;
+}
+
+#footer a {
+	border:none;
+	color:#ddd;
+	text-decoration:underline;
+}
+
+/* @group misc */
+
+.admin_datatable h4 {
+        margin:0;
+}
+
+.addthis_button a {
+	margin:0;
+	padding:0 2px;
+	border: none;
+	text-decoration: none;
+	background: none;
+}
+
+.addthis_button a img {
+	vertical-align: text-bottom;
+        margin: 0;
+}
+
+#addthis_services a {
+	text-decoration:none;
+	border:none;
+}

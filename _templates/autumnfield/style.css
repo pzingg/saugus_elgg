@@ -1,0 +1,450 @@
+/* Theme Name: Autumn Field
+Design Name: Autumn Field
+Version: 1.6
+Author: Jim Klein
+Author URI: http://community.saugususd.org/jklein
+*/
+
+/* @group defaults */
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #291E09;
+	background: #8e2800;
+	font: 90% arial,helvetica,clean,sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: #468966;
+}
+
+a:hover {
+	border-color: #8e2800;
+	color: #8e2800;
+}
+
+a img {
+	border: none;
+}
+
+acronym, abbr {
+	border-bottom: 1px dotted #0c6bf0;
+}
+
+acronym, abbr, span.caps {
+	cursor: help;
+	letter-spacing: .07em;
+}
+
+hr {
+	display: none;
+}
+
+code {
+	font-size: 1em;
+	font-style: italic;
+}
+
+blockquote{
+	background: #468966 url({{url}}_templates/autumnfield/blockquote.png) no-repeat bottom left;
+	padding: 2px 10px 45px 10px;
+	margin: 1em;
+}
+
+cite {
+	font-size: 0.9em;
+	font-style: normal;
+}
+
+cite a {
+	border-bottom: 1px dotted #DC9204;
+	text-decoration: none;
+}
+
+cite a:visited, a:hover {
+	border-bottom: none;
+}
+
+h2 {
+	margin: 25px 0 0 0;
+	padding: 0;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+h3 {
+	margin: 5px 0 0 0;
+	padding: 0;
+	font-weight: bold;
+
+}
+
+p {
+	margin: 0 0 1em;
+	padding: 0;
+	line-height: 1.5em;
+}
+
+/* @group topnav */
+
+
+#topnav {
+	margin:0;
+	padding:1px;
+	border:0 none;
+	list-style:none;
+	font:12px/100% Arial,Helvetica,FreeSans,sans-serif;
+	font-weight:bold;
+	color:#eee!important;
+	background-color: #291E09;
+	clear:both;
+	position:relative;
+	width:100%;
+	min-width:780px;
+	height: 1.5em;
+}
+
+#topnav p {
+	margin:0;
+	padding:0 4em 0 0;
+	float:right;
+}
+
+#topnav ul {
+	padding:3px 0 2px 4em;
+	margin: 0;
+}
+
+#topnav li {
+	list-style:none;
+	display:inline;
+	padding:0 1em 0 0;
+	margin:0;
+}
+
+#topnav ul li a {
+	text-decoration:none;
+	color:#eee!important;	
+	
+}
+
+#topnav a {
+	color:#eee!important;
+}
+
+#topnav a:hover {
+	color:#ffc;
+}
+
+/* @group header */
+
+#header {
+	position:relative;
+	margin: 0;
+	padding: 0 0 0 2em;
+	background: #EAD385 url(http://students.saugususd.org/_templates/autumnfield/head.jpg) no-repeat 0px -10px;
+	height:90px;
+	color: #8e2800;
+	border-bottom: 5px solid #291E09;
+	text-align: right;
+}
+
+#header h1 {
+	margin: 0;
+	padding: 25px 74px 0 0;
+	font-size: 1.6em;
+	word-spacing: 1px;
+	letter-spacing: 4px;
+	font-family: Georgia, "Times New Roman", Times, serif;	font-weight: bold;
+	font-variant:small-caps;
+}
+
+#header p {
+	margin-right: 74px;
+}
+
+#header a:link, #header a:visited, #header a:hover, #header a:active {
+	color: #8e2800;
+	text-decoration: none;
+	border-bottom: none;
+}
+
+/* @group global_menuoptions */
+
+#global_menuoptions {
+	position:absolute;
+	font-size:.9em;
+    list-style:none;
+	padding:0;
+	margin:0;
+    margin-left:10px;
+}
+
+#global_menuoptions li {
+	list-style:none;
+	display:inline;
+	padding:0 6px 0 0;
+	margin:0;
+}
+#global_menuoptions li a{
+color: #fff;
+}
+
+#global_menuoptions li a:hover{
+text-decoration: underline;
+}
+
+/* @group contentshell */
+
+#rap {
+	width: 800px;
+	margin: 0px auto 0px auto;
+	padding: 0;
+	font-size: 1em;
+	text-align: left;
+	line-height: 18px;
+	background: #b64926;
+	position: relative;
+}
+
+#contentshell {
+	width:100%;
+	border:none;
+	margin:0;
+	padding:0;
+}
+
+#contentshell td {
+	vertical-align: top;
+}
+
+/* @group sidebar */
+
+
+#sidebar {
+	float: right;
+	margin: 0;
+	padding: 0 1em 1em 0;
+	width: 200px;
+	font-family : verdana, tahoma, arial, serif;	
+	font-size:.8em;
+}
+
+#sidebar h2 {
+	margin: 0px 0 1px 0;
+	font-size: 1.1em;
+	font-weight: normal;	
+	background-color: #ffb03b;
+	color: #fff;
+	height:1%;
+	padding:3px 7px;
+	position:relative;
+	font-family: Georgia, "Times New Roman", Times, serif;	font-weight:normal;
+}
+
+#sidebar .SectionContent {
+	background:none;
+}
+
+#sidebar .SectionContent #section-body{
+	margin:0;
+}
+
+#sidebar ul {
+	list-style-type: none;
+	padding: 0 0 1em 5px;
+	margin: 0;	
+}
+
+#sidebar ul li {
+	margin: 1.5em 0 0 0;
+	padding: 0;
+        list-style:none;
+        background-color: #fff0a5;
+        color: #333;
+}
+
+#sidebar ul li ul li {
+	border: none;
+}
+
+#sidebar li a:link, #sidebar li a:visited {
+	color: #8e2800;
+	text-decoration: none;
+}
+
+#sidebar li a:hover {
+	color: #468966;
+	border-bottom: 1px solid #468966;
+}
+
+#sidebar ul li #me{
+	margin: 7px;
+	padding-bottom: 1em;
+}
+
+#sidebar li #icon a:hover {
+	border-bottom: none;
+	text-decoration: none;
+}
+
+#system_message {
+	margin: 10px 10px 0 10px;
+	padding: 0 5px;
+}
+
+/* @group main content */
+
+#content {
+	padding: 1.5em 1em;
+	background: #b64926;
+	font-size: 0.9em;
+	color:#fff;
+	overflow:hidden;
+	min-height: 580px;
+}
+
+#content ul {
+	margin-left: 0;
+	padding-left: 15px;
+}
+
+#content ul li {
+	margin-left: 23px;
+	padding-left: 0;
+}
+
+#maincontent_display {
+	margin: 0 0 0.2em;	
+	padding: 0;
+	color: #291E09;
+	background-color: #fff0a5;
+	position: relative;
+}
+
+#maincontent_display p,#maincontent_display h1,#maincontent_display h2,#maincontent_display h3,#maincontent_display h4 {
+	padding-left: 5px;
+}
+
+#maincontent_display h1 {
+	margin: 0 0 3px 0;
+	padding: 2px 0 5px 5px;
+	font-size: 1.2em;
+	color: #fff;
+	font-weight: normal;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	background-color: #ffb03b;
+}
+
+.weblog_posts {
+	width: 555px;
+	padding: 0 5px;
+}
+
+.weblog_dateheader {
+	clear:both;
+}
+
+.post, .weblog_title {
+	margin: 10px 0 20px 110px;
+}
+
+.info {
+	margin-top: 20px;
+}
+
+.user {
+	float: left;
+	margin:0;
+	padding:0.5em 1em 1em 0;
+	font-size: 0.9em;
+	display:inline;
+	color:#D1C3B6;
+	overflow:hidden;
+	width: 90px;
+	clear: both;
+}
+
+#comments ol, #comments ul {
+    margin: 3px 0 10px 0;
+    padding: 0;
+}
+
+#comments li {
+    margin: 10px 0 10px 30px;
+    line-height: 16px;
+}
+
+#comments ul li {
+    list-style-type: square;
+}
+
+.comment_owner {
+	background-color: #468966;
+    color: #333;
+	padding:5px;
+    margin:20px 20px 20px 0;
+   height:50px;
+}
+
+.comment_owner a {
+  color:#8e2800;
+  text-decoration: underline;
+}
+
+.comment_owner img {
+   margin:0px 5px 0px 0px;
+   text-align:left;
+}
+
+/* @group footer */
+
+#footer {
+	margin:0;
+	padding: 7px 20px;
+	clear: both;
+	font-size: 0.7em;
+	color: #CCCCCC;
+	background-color: #291E09;
+	text-align:center;
+}
+
+#footer a {
+	border:none;
+	color:#F4F4F4;
+	text-decoration:underline;
+}
+
+/* @group misc */
+
+.admin_datatable h4 {
+        margin:0;
+}
+
+#embed textarea {
+	width: 80%;
+	height: 60px;
+}
+
+#embed input {
+	vertical-align: top;
+}
+
+.addthis_button a {
+	margin:0;
+	padding:0 2px;
+	border: none;
+	text-decoration: none;
+	background: none;
+}
+
+.addthis_button a img {
+	vertical-align: text-bottom;
+}
+
+#addthis_services a {
+	text-decoration:none;
+	border:none;
+}

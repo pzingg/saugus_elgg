@@ -1,0 +1,456 @@
+/* Theme Name: SWATTEC
+Design Name: SWATTEC
+Version: 1.1
+Author: Jim Klein
+Author URI: http://community.saugususd.org/jklein
+*/
+
+/* @group defaults */
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background: #ececec;
+	font: 80% 'Lucida Grande', Arial, Verdana, sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: #265281;
+		/*border-bottom: 1px dotted #4769cc;*/
+
+}
+
+a:hover {
+	color: #4769cc;
+	border-bottom: none;
+}
+
+a img {
+	border: none;
+}
+
+acronym, abbr {
+	border-bottom: 1px dotted #0c6bf0;
+}
+
+acronym, abbr, span.caps {
+	cursor: help;
+	letter-spacing: .07em;
+}
+
+hr {
+	display: none;
+}
+
+code {
+	font-size: 1em;
+	font-style: italic;
+}
+
+blockquote{
+	background: #ececec;
+	padding: 2px 10px 2px 10px;
+	margin: 1em;
+}
+
+cite {
+	font-size: 0.9em;
+	font-style: normal;
+}
+
+cite a {
+	border-bottom: 1px dotted #DC9204;
+	text-decoration: none;
+}
+
+cite a:visited, a:hover {
+	border-bottom: none;
+}
+
+h2 {
+	margin: 25px 0 0 0;
+	padding: 0;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+h3 {
+	margin: 5px 0 0 0;
+	padding: 0;
+	font-weight: bold;
+
+}
+
+p {
+	margin: 0 0 1em;
+	padding: 0;
+	line-height: 1.5em;
+}
+
+/* @group topnav */
+
+#topnav {
+	margin:0;
+	padding:1px;
+	list-style:none;
+	font:12px/100% Arial,Helvetica,FreeSans,sans-serif;
+	font-weight:bold;
+	color:#ffffff;
+	background-color: #4377a3;
+	width:100%;
+	min-width:780px;
+}
+
+#topnav p {
+	margin:0 2em 0 0;
+	padding:0;
+	float:right;
+}
+
+#topnav ul {
+	padding:0 0 0 2em;
+	margin:4px;
+}
+
+#topnav li {
+	list-style:none;
+	display:inline;
+	padding:0 1em 0 0;
+	margin:0;
+}
+
+#topnav ul li a {
+	text-decoration:none;
+	color:#ffffff;	
+	
+}
+
+#topnav a {
+	color:#fff;	
+	border: none;
+}
+
+#topnav a:hover {
+	background: none;
+	border-bottom: #fff 1px solid;
+}
+
+#topnav a:visited {
+	color:#fff;
+	border: none;
+}
+
+/* @group global_menuoptions */
+
+#global_menuoptions {
+    position:absolute;
+    list-style:none;
+	padding:0;
+	margin:0;
+    margin-left:2em;
+    font-size: .9em;
+}
+
+#global_menuoptions li {
+	list-style:none;
+	display:inline;
+	padding:0 6px 0 0;
+	margin:0;
+}
+
+/* @group header */
+
+#header {
+	position:relative;
+	margin: 0;
+	padding: 0 0 0 2em;
+	background: #fff url({{url}}_templates/swattec/headerbg.png) no-repeat 1em top;
+	height: 100px;
+	color: #fff;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+#header h1 {
+	margin:0;
+	padding: 20px 0 0  0;
+	font-size: 2.2em;
+	word-spacing: 1px;
+	font-weight:normal;
+}
+
+#header p {
+	margin:0;
+}
+
+#header a:link, #header a:visited, #header a:hover, #header a:active {
+	color: #fff;
+	text-decoration: none;
+	border-bottom: none;
+	background: none;
+}
+
+#header #share {
+	position:absolute;
+	right: 2em;
+	bottom: 2px;
+	font-size: 90%;
+	font-style:italic;
+}
+
+#separator {
+	position:relative;
+	margin: 0;
+	padding: 0;
+	background: #4377a3 url({{url}}_templates/swattec/separator.png) repeat-x 0 top;
+	height: 11px;
+	color: #bec8d0;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+#contentshell {
+	width:100%;
+	border:none;
+	margin:0;
+	padding:0;
+}
+
+#contentshell td {
+	vertical-align: top;
+}
+
+/* @group sidebar */
+
+
+#sidebar {
+	margin: 0;
+	padding: 1em 1em 1em 0;
+	width: 200px;
+	font-size: .9em;
+}
+
+#sidebar h2 {
+	margin: 0;
+	font-size: 1em;
+	font-weight: normal;	
+	background-color: #6a6a6a;
+	color: #fff;
+	padding:5px 0 5px 5px;
+	position:relative;
+	
+}
+
+#sidebar ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;	
+}
+
+#sidebar ul li {
+	margin: 0 0 10px 0;
+	padding:0px;
+	list-style:none;
+	background-color: #fff;
+	color: #000;
+}
+
+#sidebar ul li ul {
+	border-left: 1px solid #d2d2d2;
+	border-right: 1px solid #d2d2d2;
+	border-bottom: 1px solid #d2d2d2;
+}
+
+#sidebar #me {
+	padding: 5px;
+	border-left: 1px solid #d2d2d2;
+	border-right: 1px solid #d2d2d2;
+	border-bottom: 1px solid #d2d2d2;
+}
+
+
+#sidebar li a:link, #sidebar li a:visited {
+	color: #4377a3;
+	text-decoration: none;
+	border: none;
+	padding: 3px;
+}
+
+#sidebar li a:hover {
+	color: #4769cc;
+	font-style: underline;
+}
+
+#sidebar ul li #me{
+	margin: 0px;
+	padding-bottom: 1em;
+}
+
+#sidebar li #icon a:hover {
+	border-bottom: none;
+	text-decoration: none;
+}
+
+#sidebar ul li ul {
+	padding: 5px 0 5px 5px;
+}
+
+#sidebar ul li ul li {
+	margin: 0;
+	padding: 5px 0;
+}
+
+/* @group main content */
+
+#system_message {
+	background-color: #fffdca;
+	margin: 10px 10px 0 10px;
+	padding: 0 5px;
+	border: 1px solid #f9d42e;
+}
+
+
+#content {
+	padding: 1em 1em;
+
+
+	color:#403A2E;
+	overflow:hidden;
+	min-height: 780px;
+}
+
+
+#content ul {
+	margin-left: 23px;
+	padding-left: 15px;
+	/*list-style-type: none;*/
+}
+
+/*#content ul li {
+	padding-left: 1.5em;
+}*/
+
+#maincontent_display {
+	margin: 0 0 0.2em;	
+	padding: 1em;
+	color: #000;
+	background-color: #fff;
+	border: 1px solid #d2d2d2;
+}
+
+#maincontent_display h1 {
+	margin: 0 0 3px 0;
+	padding-bottom: 5px;
+	font-size: 1.4em;
+	color: #403A2E;
+	font-weight: normal;
+	border-bottom: 1px solid #000;
+}
+
+#sub_menu {
+	font-size: .9em;
+}
+
+.weblog_dateheader {
+	clear:both;
+}
+
+.weblog_posts {
+	clear:both;
+}
+
+.weblog_title {
+    padding:0 0 15px 110px;
+}
+
+.post {
+    margin: 0 0 10px 0;
+    padding: 0 0 20px 110px;
+}
+
+.post p {
+margin-top: 10px;
+}
+
+.user {
+	float: left;
+	margin:0;
+	padding:0.5em 1em 1em 0;
+	display:inline;
+	color:#D1C3B6;
+	overflow:hidden;
+	width: 90px;
+}
+
+#comments ol, #comments ul {
+    margin: 3px 0 10px 0;
+    padding: 0;
+}
+
+#comments li {
+    margin: 10px 0 10px 30px;
+    line-height: 16px;
+}
+
+#comments ul li {
+    list-style-type: square;
+}
+
+.comment_owner {
+	background-color: #599ed9;
+    color: #fff;
+	padding:5px;
+    margin:20px 20px 20px 0;
+   height:50px;
+}
+
+.comment_owner a {
+  color:#a4322c;
+  text-decoration: underline;
+}
+
+.comment_owner img {
+   margin:0px 5px 0px 0px;
+   text-align:left;
+}
+
+/* @group footer */
+
+#footer {
+	margin:0;
+	padding: 1.62em 3.75em;
+	clear: both;
+	font-size: 0.7em;
+	color: #fff;
+	background-color: #4377a3;
+	text-align:center;
+}
+
+#footer a {
+	border:none;
+	color:#fff;
+	text-decoration:underline;
+}
+
+/* @group misc */
+
+.admin_datatable h4 {
+        margin:0;
+}
+
+.addthis_button a {
+	margin:0;
+	padding:0 2px;
+	border: none;
+	text-decoration: none;
+	background: none;
+}
+
+.addthis_button a img {
+	vertical-align: text-bottom;
+}
+
+#addthis_services a {
+	text-decoration:none;
+	border:none;
+}

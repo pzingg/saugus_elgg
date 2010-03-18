@@ -1,0 +1,74 @@
+$Id$
+
+This plugin is an implements captcha check, in first stage, to comments. Could
+be set only to anonymous users. This plugin is disabled by default, to
+enable set $captcha_anon_only flag. (See config.php)
+
+REQUIREMENTS:
+- php-gd module
+
+TO INSTALL:
+- copy the directory captcha/ into your plugins directory, [elgg install path]/mod/
+
+- modify units/weblogs/weblogs_comments_add.php:
+@@ -51,6 +51,9 @@
+                             )
+                             );
+         
++        // show captcha image
++        $run_result .= run('mod:captcha:display');
++
+         $run_result .= templates_draw(array(
+         
+                                 'context' => 'databox1',
+
+And we're done! Have fun with spambots ;-).
+
+Here is a sample how to implement when public register is enable. Modify the
+next files:
+
+Here is a example how to implement to the public register:
+
++++ units/invite/join_noinvite.php
+@@ -39,6 +39,10 @@
+                                                'contents' =>
+display_input_field(array("invite_email","","text"))
+                    )
+                    );
++
++                // captcha image show to unregistered user
++                $run_result .= run('mod:captcha:display');
++
+            $buttonValue = __gettext("Register");
+            $run_result .= <<< END
+            <p align="center">
+
+
++++ units/invite/invite_actions.php
+@@ -17,6 +17,10 @@
+         $invite = new StdClass;
+         $invite->name = trim(optional_param('invite_name'));
+         $invite->email = trim(optional_param('invite_email'));
++
++         //allow plugin to process register auto invite
++         $invite = plugin_hook('invite', 'register', $invite);
++
+         if (!empty($invite->name) && !empty($invite->email)) {
+             if (logged_on || ($CFG->publicinvite == true)) {
+                 if (($CFG->maxusers == 0 || (count_users('person') <
+$CFG->maxusers))) {
+
+
++++ mod/captcha/lib.php 
+@@ -14,6 +14,10 @@ function captcha_init () {
+
+        // captcha for comments
+        listen_for_event('weblog_comment','create','captcha_process');
++
++        // captcha for register invite
++        listen_for_event('invite','register','captcha_process');
++
+    }
+ }
+
+

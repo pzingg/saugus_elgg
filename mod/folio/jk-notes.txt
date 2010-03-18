@@ -1,0 +1,5 @@
+This folio plugin was originally developed by Nathan Garrett (blog at elgg.net/garrettn)
+Please ignore the setup info as it has been integrated into the SUSD elgg version, along
+with a number of bug fixes/enhancements.
+
+--Jim Klein

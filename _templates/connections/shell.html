@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{{title}}</title>
+{{metatags}}
+</head>
+<body>
+ <!-- elgg banner and logo -->
+<div id="container"><!-- start container -->
+<div id="header"><!-- start header -->
+<div id="welcome">Welcome {{userfullname}}</div>
+             {{topmenu}}
+      <ul id="navigation">
+<div id="site-title">
+              <h1><a href="{{url}}index.php">My Elgg Site</a></h1>
+              <p>Personal Learning Landscape</p>
+            </div>
+          {{menu}}
+       </ul>
+</div><!-- end header -->
+<div id="content_holder"><!-- start contentholder -->
+<div id="maincontent_container"><!-- start main content -->
+     {{messageshell}}
+    {{mainbody}}
+</div><!-- end main content -->
+<div id="sidebar_container">
+<div id="sidebar"><!-- start sidebar -->
+    <ul><!-- open sidebar lists -->
+      {{sidebar}}
+    </ul>
+</div><!-- end sidebar -->
+</div>
+</div><!-- end contentholder -->
+<div class="clearall" />
+ <div id="footer"><!-- start footer -->
+     <a href="http://elgg.net"><img src="{{url}}_templates/elgg_powered.png" border="0"></a>&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>
+
+ </div><!-- end footer -->
+</div><!-- end container -->
+ </body>
+ </html>

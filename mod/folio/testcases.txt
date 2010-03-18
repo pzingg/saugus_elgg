@@ -1,0 +1,47 @@
+Test Cases
+
+
+Use cases to verify that important functionality in the Elgg Add-in are working properly.
+
+
+Start with a fresh installation of the most recent Elgg.
+
+=============================================================================
+= BROWSERS
+=============================================================================
+
+* IE
+* Firefox
+
+=============================================================================
+= Edit
+=============================================================================
+
+For your own homepage & a subpage
+For a community you belong to
+For a friend
+
+* View
+* Edit
+* Change name, permission, body, and parent
+ - Test illegal name conventions.
+* Save
+
+=============================================================================
+= View
+=============================================================================
+
+Verify AJAX loading behavior in sidemenu
+Verify extra character linking behavior in sidemenu
+Add a comment
+
+=============================================================================
+= Pages
+=============================================================================
+
+Check Recent Changes
+ - Go back a page
+ - Click on username
+ - Click on page link
+
+Access RSS Feed

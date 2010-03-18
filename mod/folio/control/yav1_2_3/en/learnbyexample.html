@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML><HEAD><TITLE>yav - Javascript form validation tool</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META name="Author" content="f.crivellaro" />
+<META name="Keywords" content="javascript, form, forms, validation, validator, form validation, form validator, javascript validation, web design" />
+<META name="Description" content="yav is a SIMPLE, POWERFUL and CUSTOMIZABLE javascript-based form validation tool" />
+<META content="MSHTML 6.00.2600.0" name=GENERATOR>
+<LINK href="../styles/yav-style.css" type=text/css rel=stylesheet>
+<SCRIPT src="../js/yav.js"></SCRIPT>
+<SCRIPT src="../js/yav-config.js"></SCRIPT>
+<SCRIPT>
+function show(div, content) {
+    document.getElementById(div).innerHTML = content;
+    document.getElementById(div).style.display = 'block';
+}
+function hide(div) {
+    document.getElementById(div).innerHTML = '';
+    document.getElementById(div).style.display = 'none';
+}
+
+basicRules="<BR>&nbsp;rules[0]='username|required';<BR>&nbsp;rules[1]='password|minlength|8';<BR>&nbsp;rules[2]='description|alphaspace';<BR>&nbsp;rules[3]='decimal|double';<BR>&nbsp;rules[4]='range|numrange|5-100'<BR>&nbsp;rules[5]='range|keypress|0123456789';<BR><BR>";
+dateRules="<BR>&nbsp;rules[6]='formerDate|required';<BR>&nbsp;rules[7]='formerDate|date';<BR>&nbsp;rules[8]='latterDate|required';<BR>&nbsp;rules[9]='latterDate|date';<BR>&nbsp;rules[10]='formerDate|date_lt|$latterDate';<BR><BR>";
+advancedRules="<BR>&nbsp;rules[11]='nameRequired|equal|checked|pre-condition';<BR>&nbsp;rules[12]='name|required|post-condition';<BR>&nbsp;rules[13]='11|implies|12|name required';<BR>&nbsp;rules[14]='contactType|required';<BR>&nbsp;rules[15]='contactType|equal|phone|pre-condition';<BR>&nbsp;rules[16]='contact|regexp|^[0-9]{10}$|post-condition';<BR>&nbsp;rules[17]='15|implies|16|Enter a phone (ten digits)';<BR>&nbsp;rules[18]='contactType|equal|e-mail|pre-condition';<BR>&nbsp;rules[19]='contact|regexp|.+@.+\..+$|post-condition';<BR>&nbsp;rules[20]='18|implies|19|Enter a valid e-mail';<BR><BR>";
+
+//only for test purposes
+function checkOnSubmit(formName, r) {
+    document.getElementById(errorsdiv).className = '';
+    document.getElementById(errorsdiv).style.display = 'none';
+    var alertType = document.getElementById('alertType').value;
+    if (performCheck(formName, r, alertType)) {
+        alert('Form validated (you usually submit your form now)');
+    } else if (alertType=='jsVar') {
+        alert('jsErrors variable contains the array of errors:\n\n' +jsErrors + '\n\n Use this variable like you prefer!');
+    }
+}
+
+var rules=new Array();
+rules[0]='username|required';
+rules[1]='password|minlength|8';
+rules[2]='description|alphaspace';
+rules[3]='decimal|double';
+rules[4]='range|numrange|5-100';
+rules[5]='range|keypress|0123456789';
+rules[6]='formerDate:Former date|required';
+rules[7]='formerDate:Former date|date';
+rules[8]='latterDate:Latter date|required';
+rules[9]='latterDate:Latter date|date';
+rules[10]='formerDate:Former date|date_lt|$latterDate:Latter date';
+rules[11]='nameRequired|equal|checked|pre-condition';
+rules[12]='name|required|post-condition';
+rules[13]='11|implies|12|name required';
+rules[14]='contactType:Contact type|required';
+rules[15]='contactType:Contact type|equal|phone|pre-condition';
+rules[16]='contact|regexp|^[0-9]{10}$|post-condition';
+rules[17]='15|implies|16|Enter a phone (ten digits)';
+rules[18]='contactType:Contact type|equal|e-mail|pre-condition';
+rules[19]='contact|regexp|.+@.+\..+$|post-condition';
+rules[20]='18|implies|19|Enter a valid e-mail';
+</SCRIPT>
+</HEAD>
+<BODY>
+<TABLE id=layout style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px" cellSpacing=0 cellPadding=0 width="100%">
+  <TBODY>
+
+<!-- HEADER -->
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 8px; PADDING-LEFT: 8px; PADDING-BOTTOM: 8px; PADDING-TOP: 8px" 
+    colSpan=3>
+      <TABLE id=banner 
+      style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px" 
+      width="100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=center align=left width=90><img src="../img/yav-logo.gif" width="80" height="50" alt="Yav Logo" border="0"></TD>
+          <TD><FONT size=2><B>Javascript form validation tool</B></FONT></TD>
+          <TD 
+          style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px" 
+          vAlign=center align=right>
+          <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=133036&amp;type=2" width="125" height="37" border="0" alt="SourceForge.net Logo" /></a>
+        </TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+
+<!-- TOP BAR -->
+    <TD id=bar colSpan=3>
+      <TABLE 
+      style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px" 
+      width="100%">
+        <TBODY>
+        <TR>
+          <TD align=left>
+          <a href="../en/index.html"><img src="../img/flag.en.png" width="20" height="14" border="0" alt="english" /></a>
+          <a href="../it/index.html"><img src="../img/flag.it.png" width="20" height="14" border="0" alt="italiano" /></a>
+          &nbsp;&nbsp;<A href="index.html">Home</A> </TD>
+          <TD align=right><SPAN id=Content> 
+            <A href="download.html">Download</A></SPAN> | <A href="mailto:f.crivellaro@gmail.com">Contact</A> 
+        </TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+
+<!-- LEFT COLUMN -->
+    <TD id=leftColumn style="PADDING-TOP: 0px" vAlign=top><SPAN id=Content>
+      <br>
+      <H3 class=heading3><A>Documentation</A></H3>
+      <SPAN class=paragraph><BR>
+          <A title="Getting started" href="gettingstarted.html">Getting started</A><BR><BR>
+          <A title="Validation rules" href="validationrules.html">Validation rules</A><BR><BR>
+          <A title="Learn by example" href="learnbyexample.html">Learn by example</A><BR></SPAN></SPAN> 
+        <BR><BR>
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-8127307659200148";
+        google_ad_width = 120;
+        google_ad_height = 240;
+        google_ad_format = "120x240_as";
+        google_ad_type = "text";
+        google_ad_channel ="";
+        google_color_border = "CCCCCC";
+        google_color_bg = "FFFFFF";
+        google_color_link = "000000";
+        google_color_url = "666666";
+        google_color_text = "333333";
+        //--></script>
+        <script type="text/javascript"
+          src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script><BR><BR>
+        <a href="http://pajhome.org.uk"><img src="../img/Paj_s_Home.gif" width="80" height="23" border="0" alt="Paj_s Home" /></a><br><br>
+    </TD>
+
+<!-- RIGHT COLUMN -->
+    <TD id=rightColumn vAlign=top>
+      <DIV>
+      <DIV id=Content>
+      <H1 class=heading1>Learn by example</H1>
+      <P class=paragraph>
+      <DIV class=panelContent >
+
+      <DIV id=errorsDiv>
+      </DIV>
+      <FORM name=exampleform onsubmit="checkOnSubmit('exampleform', rules);return false;" >
+        <TABLE width=100%>
+        <TR>
+          <TD class="">Choose alert type:
+          <SELECT class=inputNormal name=alertType id=alertType> <OPTION 
+              value=classic selected>classic</OPTION> <OPTION 
+              value=innerHtml>innerHtml</OPTION> <OPTION 
+              value=jsVar>jsVar</OPTION></SELECT></TD>
+        </TR>
+        <TR>
+          <TD class="">&nbsp;</TD>
+        </TR>
+        <TR>
+        <TD width=40% valign=top>
+            <TABLE valign=top>
+            <TR><TD class=><H4>Basic</H4></TD><TD align=right><A href="#" onmouseover="show('rulesViewer', basicRules)" onmouseout="hide('rulesViewer')" ><FONT size=1>source</FONT></A></TD></TR>
+            <TR><TD class=>Username:</TD><TD><INPUT type=text name=username class=inputNormal /></TD></TR>
+            <TR><TD class=>Password:</TD><TD><INPUT type=password name=password class=inputNormal /></TD></TR>
+            <TR><TD class=>Description:</TD><TD><TEXTAREA name=description class=inputNormal cols=17 rows=3>$%&</TEXTAREA></TD></TR>
+            <TR><TD class=>Range (5-100):</TD><TD><INPUT type=text name=range class=inputNormal onkeypress="checkKeyPress(event, this, rules);" /></TD></TR>
+            <TR><TD class=>Decimal:</TD><TD><INPUT type=text name=decimal class=inputNormal /></TD></TR>
+            <TR><TD class=>&nbsp;</TD><TD></TD></TR>
+            <TR><TD class=><H4>Date</H4></TD><TD align=right><A href="#" onmouseover="show('rulesViewer', dateRules)" onmouseout="hide('rulesViewer')" ><FONT size=1>source</FONT></A></TD></TR>
+            <TR><TD class=>Former date:</TD><TD><INPUT type=text name=formerDate class=inputNormal /></TD></TR>
+            <TR><TD class=>Latter date:</TD><TD><INPUT type=text name=latterDate class=inputNormal /></TD></TR>
+            <TR><TD class=>&nbsp;</TD><TD></TD></TR>
+            <TR><TD class=><INPUT type=submit value=Check class=buttonstyle /><br></TD><TD></TD></TR>
+            </TABLE>
+        </TD>
+        <TD width=5%></TD>
+        <TD width=55% valign=top>
+            <TABLE width=100%>
+            <TR><TD class=><H4>Advanced</H4></TD><TD>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <A href="#" onmouseover="show('rulesViewer', advancedRules)" onmouseout="hide('rulesViewer')" ><FONT size=1>source</FONT></A></TD></TR>
+            <TR><TD class=>Name required:</TD><TD width=100%><INPUT type=checkbox name=nameRequired class=inputNormal value=checked /></TD></TR>
+            <TR><TD class=>Name:</TD><TD><INPUT type=text name=name class=inputNormal /></TD></TR>
+            <TR><TD class=>&nbsp;</TD><TD></TD></TR>
+            <TR><TD class=>Contact type:</TD><TD>
+                <SELECT name=contactType class=inputNormal />
+                    <OPTION value=''>&nbsp;</OPTION>
+                    <OPTION value='e-mail'>e-mail</OPTION>
+                    <OPTION value='phone'>phone</OPTION>
+                </SELECT></TD></TR>
+            <TR><TD class=>contact:</TD><TD><INPUT type=text name=contact class=inputNormal /></TD></TR>
+            <TR><TD class=>&nbsp;</TD><TD></TD></TR>
+            </TABLE>
+            <TABLE>
+            <TR><TD class= width="100%"><DIV id="rulesViewer" style="display: none" class="cssRules" ></DIV></TD></TR>
+            </TABLE> 
+       </TD>
+        </TR>
+        </TABLE>
+      </FORM>
+      </DIV>
+
+      </P></DIV></DIV>&nbsp;
+      </TD>
+    <TD></TD></TR>
+
+<!-- FOOTER -->
+  <TR>
+    <TD id=footer colSpan=3>
+      <TABLE width="100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=top align=right>
+            Copyright 2005. All rights reserved.</TD></TR></TBODY>
+      </TABLE>
+  </TD></TR></TABLE>
+</TR></TBODY></TABLE></BODY></HTML>

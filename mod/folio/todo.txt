@@ -1,0 +1,72 @@
+RSS for files.
+
+Add accesslevel to rss system.
+
+In PROGRESS:
+- Upload templates from Elgg.net, have one for the LR similar to her requested template.
+
+Get laurie's template enabled
+
+add indexes to mysql
+
+Add global rss
+Add rss reader on 1st page
+
+Wiki history & revert
+
+Have something to show which user is logging in in logs
+
+Implement a nicer error message for duplicate pages. 
+
+------------------------------------------------------------------------------
+tCourse Modifications
+ * Make a more scalable (aka, pagination) way of viewing communities and users.  Takes too long to load all of the different people once we get lots of users involved.
+------------------------------------------------------------------------------
+
+General 
+ - Go thru & clean up limit 1 statements -- i think that'll mess of up postgress
+ - Clean-up @todo statements in code.
+ - Rewrite the title property to that it strips out all html tags.  
+ - Make a bulk download / upload for wiki pages.
+Evaluate all queries to replace exec sql with the paramaterized form where input data is cleaned up.
+   (look at 	$pages = get_records_sql( "SELECT page_ident, p.title FROM " . $CFG->prefix . "folio_page p " .
+		"INNER JOIN " . $CFG->prefix . "users u ON p.user_ident = u.ident " .
+		"WHERE LOWER(p.title) = ? AND p.newest = 1 AND LOWER(u.username) = ? " . 
+		' LIMIT 1 ',
+		array( $page, $user ) ); )
+
+
+Page View
+ - Treeview control will show a node as expandable even if the user doesn't have permission to view the child pages.
+
+
+Page Edit
+ - Delete
+ - On Save
+   - Make sure we're not overwriting an existing page.
+ - The tree menu doesn't show if we're adding a new sibling page via clicking on [[link]]
+ - Drag & Drop file and links
+ - On creating a new page, the sidemenu stuff doesn't load at all.
+
+
+Permissions
+- Page create doesn't seem to be using the permission settings properly 
+- Private security setting doesn't work properly for communities.  Private needs to be to the community, not to the user.
+- Don't think that moderated security is working when logged in as news and editing nathan's pages.
+
+
+Make email activity default to sending emails.
+
+Spell-check isn't working.
+ - This is a bug in core rich text editor box, there is an open issue in the elgg bugtracker.
+
+RSS
+ - Program in tags
+ - Program in different authors
+ - Add RSS code to posting blogs, blog comments, page comments, and files.
+
+Delete
+ - Minor bug, when deleting a child page, the treeview control still shows the parent as expandable.
+
+need to
+* set comments visibility to the same as the attached object, and then reset permissions upon a change in the holding obejct's permission set.

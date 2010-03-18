@@ -1,0 +1,858 @@
+/*
+Theme Name: Northern-Web-Coders
+Theme URI: http://www.northern-web-coders.de/
+Description: Northern-Web-Coders Theme
+Version: 1.0
+
+Author: Kai Ackermann
+*/
+
+body
+{
+background: #d8d8d3;
+font-family: Lucida Grande, Verdana, sans-serif;
+margin: 0;
+padding: 0;
+font-size:80%;
+text-align: center;
+}
+
+a
+{
+font-size:100%;
+color: #495865;
+}
+
+a:hover
+{
+color: #6F6F6F;
+}
+
+h2, h3, h4, h5 {
+    margin:0px 0px 5px 0px;
+    padding:0px;
+    font-size:100%
+}
+
+#container
+{
+background: #FFFFFF;
+margin: 0 auto 0 auto;
+width: 769px;
+text-align: left;
+border: 2px solid #5F707A;
+}
+
+/*-----------------------------------------
+STATUS BAR 
+-------------------------------------------*/
+
+#statusbar {
+    padding: 3px 5px 0 0;
+    margin: 0px;
+    height:16px;
+    background:#eee;
+    color: #333;
+    font-size:80%;
+}
+
+#statusbar a {
+    color: #666;
+    background:#eee;
+}
+
+#welcome {
+    float: left;
+}
+
+#welcome p{
+    font-weight:bold;
+    padding:0 0 0 4px;
+    margin:0px;
+}
+
+#global_menuoptions {
+    text-align: right;
+    padding:0px;
+    margin:0px;
+    float:right;
+}
+
+#global_menuoptions ul {
+    margin: 0; 
+    padding: 0;
+}
+
+#global_menuoptions li {
+    margin: 0; 
+    padding: 0;
+    display: inline;
+    list-style-type: none;
+    border: none;
+    margin-left:10px;
+}
+
+#global_menuoptions a {
+    text-decoration: none;
+}
+
+#global_menuoptions a:hover{
+    text-decoration:underline;
+}
+
+/*--------------------------------------------
+  Header
+  -------------------------------------------*/
+
+#header
+{
+background: url({{url}}_templates/northern/totems_2.jpg);
+width: 769px;
+height: 200px;
+margin: 0;
+padding: 0;
+text-align: right;
+}
+
+#header h1 {
+    padding:0 5px 0 5px;
+    margin:0px;
+    color:#fff;
+    }
+
+#header h1 a {
+    color:#fff;
+text-decoration: none;
+    }
+
+
+#header h1 a:hover {
+    color: #6F6F6F;
+    }
+
+#header h2 {
+    padding:0 5px 0 5px;
+    margin:0px;
+    color:#fff;
+    }
+
+/*--------------------------------------------
+NAVIGATION 
+----------------------------------------------*/
+
+#navigation ul
+{
+padding: 0;
+margin: 0;
+background: #5F707A;
+border-top: 1px solid #DFDFDF;
+border-bottom: 0px solid #DFDFDF;
+float: left;
+width: 769px;
+font-family: arial, helvetica, sans-serif;
+}
+
+
+
+#navigation ul li { display: inline; }
+
+#navigation ul li a
+{
+padding: 10px 14px 11px 14px;
+background: #9C9D95;
+color: #ffffff;
+text-decoration: none;
+font-weight: bold;
+float: left;
+font-size:85%;
+border-right: 1px solid #FFFFFF;
+}
+
+#navigation ul li a:hover
+{
+color: #990000;
+background: #C9C0B0;
+}
+
+#navigation a:link.current, #navigation a:visited.current
+{
+padding: 10px 14px 11px 14px;
+background: #C9C0B0;
+color: #990000;
+text-decoration: none;
+font-weight: bold;
+float: left;
+border-right: 1px solid #DFDFDF;
+}
+
+#navigation a:link.current, #navigation a:visited.current a:hover
+{
+background: #6F6F6F;
+}
+
+
+/*-------------------------------------------------
+HOLDS THE MAIN CONTENT E.G. BLOG, PROFILE ETC 
+----------------------------------------------------*/
+
+#maincontent_container
+{
+position: relative;
+left: 20px;
+float: left;
+padding: 0;
+width: 68%;
+color: #495865;
+font-size:85%;
+}
+
+/*#maincontent_container h2
+{
+border-bottom: 1px solid #6F6F6F;
+color: #5F707A;
+margin: 20px 0 5px 0;
+padding: 0 0 3px 3px;
+text-align: right;
+}*/
+
+/*-------------------------------------------------------------
+THIS DISPLAYS THE ACTUAL CONTENT WITHIN maincontent_container
+--------------------------------------------------------------*/
+
+#maincontent_display h1 {
+    padding-bottom: 2px;
+    border-bottom: 1px solid #666;
+    margin: 10px 0 0 0;
+    font-size:120%;
+    color: #666;
+}
+
+#maincontent_display #sub_menu {
+    font-family: verdana;
+    padding: 2px 0 0 0;
+    margin: 0 0 15px 0;
+    font-weight: normal;
+    color: #990000;
+}
+
+#maincontent_display #sub_menu a {
+    font-weight:bold;
+    margin:0px;
+    padding:0px;
+    color: #990000;
+}
+
+#maincontent_display #sub_menu a:hover {
+    text-decoration: underline;
+}
+
+#maincontent_display #sub_menu p {
+      margin:0px;
+      padding:0px;
+}
+
+/*-----------------------------------------
+  SIDEBAR
+  ----------------------------------------*/
+
+#sidebar
+{
+clear: right;
+float: left;
+position: relative;
+top: 10px;
+left: 50px;
+margin: 0 0 10px 0;
+width: 30%;
+font-size:90%;
+}
+
+#sidebar ul
+{
+list-style-type: none;
+margin: 10px 0;
+padding: 0;
+}
+
+#sidebar ul li
+{
+color: #5F5F5F;
+margin: 0;
+padding: 0;
+}
+
+#sidebar ul li p
+{
+width: 190px;
+font-weight: bold;
+}
+
+#sidebar ul li h2
+{
+border-bottom: 1px solid;
+width: 190px;
+font-weight: bold;
+margin: 0;
+padding: 0;
+}
+
+#sidebar ul li ul
+{
+/*margin: 5px 0 15px 10px;*/
+}
+
+#sidebar ul li ul li
+{
+font-weight: normal;
+margin: 0 0 3px 0;
+padding: 0;
+line-height: 12px
+}
+
+#sidebar ul li#winamp ul li
+{
+width: 190px
+}
+
+#sidebar ul li ul li a
+{
+color: #5F5F5F;
+text-decoration: none;
+}
+
+#sidebar ul li ul li a:hover
+{
+font-weight: bold;
+text-decoration: none
+}
+
+/*-------------------------------------------
+SIDEBAR DISPLAY COMPONENTS 
+----------------------------------------------*/
+
+#sidebar_user {
+}
+
+#recent_activity {
+}
+
+#community_owned {
+}
+
+#community_membership {
+}
+
+#sidebar_friends {
+}
+
+#search {
+}
+
+#me {
+     padding: 3px;
+     margin:0;
+}
+
+#me p{
+   font-weight:normal;
+   font-weight: normal;
+   margin:0;
+ }
+
+#sidebar #sidebar_user p {
+  padding:4px 0 0 0;
+  font-weight: normal;
+ }
+
+
+/*--- extra div's when looking at someone else's page ---*/
+
+#sidebar_weblog {
+}
+
+#sidebar_files {
+}
+
+#searchform
+{
+margin: 2px 0 15px 0;
+}
+
+#searchform input
+{
+background: #FFFFFF;
+border: 1px solid #6F6F6F;
+font-size: 11px;
+margin-top: 3px;
+padding: 2px;
+}
+
+/*--------------------------------------
+  FOOTER
+  --------------------------------------*/
+
+#footer
+{
+color: #FFFFFF;
+background: #5F707A;
+border-top: 1px solid #DFDFDF;
+clear: both;
+margin: 0 auto 0 auto;
+padding: 16px 0 17px 0;
+text-align: center;
+width: 769px;
+}
+
+#footer a
+{
+color: #ffffff
+}
+
+/*-------------------------------------
+  Blog classes
+  ------------------------------------*/
+
+.weblog_posts {
+    margin:0 0 30px 0;
+}
+
+.weblog_posts .entry h3 {
+   color:#1181AA;
+   background:#fff;
+   padding: 0 0 10px 110px;
+}
+
+.user {
+    float: left;
+    margin: 0px;
+    /* padding: 0.3em 2em 2em 0; */
+    width: 105px;
+    text-align: left;
+}
+
+.post {
+    margin: 0 0 0 77px;
+    padding:0 0 0 40px;
+    font-family: arial;
+}
+
+.post p {
+    padding: 0;
+    margin: 3px 0 10px 0;
+    line-height: 16px;
+}
+
+.post ol, .post ul {
+    margin: 3px 0 10px 0;
+    padding: 0;
+}
+
+.post li {
+    margin: 0 0 0 30px;
+    line-height: 16px;
+}
+
+.post ul li {
+    list-style-type: square;
+}
+
+.post .blog_edit_functions p {
+      
+}
+
+.post .blog_edit_functions a {
+      
+}
+
+.post .weblog_keywords p {
+     
+}
+
+.post .weblog_keywords a {
+     
+}
+
+.info p {
+    padding: 0px;
+    margin: 0 0 5px 0;
+    color: #666;
+    background:#fff;
+    font-family: verdana;
+    font-weight: normal;
+    line-height: 14px;
+    text-align: left;
+}
+
+.info p a {
+    color: #666;
+    background:#fff;
+    text-decoration: none;
+    border-bottom: 1px dotted #666;
+    padding-bottom: 0;
+}
+
+#comments ol, #comments ul {
+    margin: 3px 0 10px 0;
+    padding: 0;
+}
+
+#comments li {
+    margin: 0 0 0 30px;
+    line-height: 16px;
+}
+
+#comments ul li {
+    list-style-type: square;
+}
+
+#comments h4 {
+    color:#1181AA;
+}
+
+.weblog_dateheader {
+    padding: 0px;
+    margin: 0 0 5px 0;
+    color: #333;
+       background:#fff;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 12px;
+       border:0px;
+    border-bottom: 1px solid #ccc;
+}
+
+.clearing{clear:both;}
+
+.post p, post li
+{
+font-family: Lucida Grande, Verdana, sans-serif;
+line-height: 130%;
+}
+
+.post blockquote
+{
+background: #fef7e9;
+border: 1px solid #e6ddcb;
+border-left: 2px solid #6F6F6F;
+font-family: Georgia, Times New Roman, serif;
+padding: 4px 4px 4px 7px;
+}
+
+/*-------------------------------------
+  Input forms
+--------------------------------------*/
+
+.textarea {
+    border: 1px solid #7F9DB9;
+    color:#71717B;
+    width: 95%;
+    height:200px;
+    padding:3px;
+}
+
+.medium_textarea {
+    width:95%;
+    height:100px;
+}
+
+.small_textarea {
+    width:95%;
+}
+
+.keywords_textarea {
+    width:95%;
+    height:100px;
+}
+
+/*----- System Messages ------*/
+
+#system_message { 
+    border:1px solid #D3322A;
+    background:#F7DAD8;
+    padding:3px 50px;
+    margin:5px 0 0 0;    
+}
+
+#system_message p{
+   padding:0px;
+   margin:2px;
+ }
+
+/*-----------------------------------------------------------------------
+DIV's to help control look and feel - infoholder holds all the profile data
+and is always located in within 'maincontentdisplay'
+
+-------------------------------------------------------------------------*/
+
+/*------ holds profile data -------*/
+.infoholder {
+    border:1px;
+    border-color:#eee;
+    border-style:solid;
+    margin:0 0 5px 0;
+}
+
+.infoholder p {
+   padding:0 0 0 5px;
+}
+
+.infoholder .fieldname {
+        /*  border:0;
+          margin:0;
+          border-bottom:1px;
+          border-color:#eee;
+          border-style:solid;
+          padding:5px;
+          color:#666;
+          background:#fff; */
+color: #5F707A;
+margin: 0px 0 5px 0;
+padding: 0 0 0px 3px;
+text-align: left;
+border:0px;
+}   
+
+.infoholder_twocolumn {
+    padding:4px;
+    border:1px;
+    border-color:#eee;
+    border-style:solid;
+    margin:0 0 10px 0;
+ }
+
+.infoholder_twocolumn .fieldname h3{
+    color:#666;
+    background:#fff;
+    border:0px;
+    border-bottom:1px;
+    border-color:#eee;
+    border-style:solid;
+}
+
+/*----------- holds administration data---------*/
+
+.admin_datatable {
+  border:1px;
+  border-color:#eee;
+  border-style:solid;
+  margin:0 0 5px 0;
+}
+
+.admin_datatable p {
+     padding:0px;
+     margin:0px;
+}
+
+.admin_datatable a {
+   
+}
+
+
+.admin_datatable td {
+   text-align:left;
+}
+
+.admin_datatable h3{
+     color:#666;
+     background:#fff;
+}
+
+.admin_datatable h4 {
+}
+
+/*---- header plus one row of content ------*/
+
+.databox_vertical {
+   background-color: #F9F9F9;
+   color:#000;
+   border:1px;
+   border-style:solid;
+   border-color:#DDD;
+   margin:0 0 5px 0;
+   padding:5px;
+ }
+
+ .databox_vertical p{
+   padding:0px;
+   margin:0px;
+   color:#1181AA;
+   background:#fff;
+ }
+
+.databox_vertical .fieldname h3 {
+  padding:0px;
+  margin:0px;
+  color:#1181AA;
+  background:#fff;
+}
+
+/*------- holds file content ----*/
+
+.filetable {
+   background-color: #F9F9F9;
+   color:#000;
+   border:1px;
+   border-style:solid;
+   border-color:#DDD;
+   margin:0 0 5px 0;
+   width:100%;
+ }
+
+ .filetable p{
+   padding:0px;
+   margin:0px;
+   color:#000; /*#1181AA;*/
+   background:#fff;
+ }
+
+.filetable a{
+   
+ }
+
+
+.filetable table {
+    text-align:left;
+}
+
+#edit_files h4 {
+     
+}
+  
+
+/*------- holds fodler content ------*/
+
+.foldertable {
+   background-color: #F9F9F9;
+   color:#000;
+   border:1px;
+   border-style:solid;
+   border-color:#DDD;
+   margin:0 0 5px 0;
+   width:100%;
+ }
+
+.foldertable a{
+  
+ }
+
+ .foldertable p{
+   padding:0px;
+   margin:0px;
+   color:#1181AA;
+   background:#fff;
+ }
+
+.foldertable table {
+    text-align:left;
+}
+
+/*------- holds network data ------*/
+
+.networktable {
+   
+}
+
+/*---------------------------------------------
+  Your Resources
+-----------------------------------------------*/
+
+.feeds {
+  border-bottom: 1px dotted #aaaaaa;
+  background: transparent url("//_templates/sunflower.jpg") bottom right no-repeat;
+}
+
+.feed_content a {
+    color:black;
+    border:0px;
+}
+
+.feed_content a:hover{
+    background:#fff;
+    }
+
+.feed_content img {
+  border: 1px solid #666666;
+  padding:5px;
+}
+
+.feed_content h3 {
+      padding:0 0 4px 0;
+      margin:0px;
+}
+
+.feed_content h3 a{
+     color:black;
+     border:0px;
+     border-bottom:1px;
+     border-style:dotted;
+     border-color:grey;
+}
+
+.feed_content h3 a:hover{
+    background:#FCD63F;
+       color:#000;
+    }
+
+.feed_date {
+    line-height: 21px;
+  font-weight: bold;
+  padding: 5px 10px 4px 5px;
+  margin:0 0 10px 0;
+  background-color: #D0DEDF;
+  color:#000;
+  text-decoration:none;
+}
+
+.via a {
+    color:#1181AA;
+    background:#fff;
+    border:0px;
+}
+
+.via a:hover {
+    background:#ffc;
+    color:#1181AA;
+}
+
+.comment_owner {
+    color: #333;
+   padding:5px;
+    margin:20px 20px 20px 0;
+   height:50px;
+}
+
+.comment_owner a {
+  color:#333;
+  text-decoration: underline;
+}
+
+.comment_owner img {
+   margin:0px 5px 0px 0px;
+   text-align:left;
+}
+
+#embed textarea {
+	width: 80%;
+	height: 60px;
+}
+
+#embed input {
+	vertical-align: top;
+}
+
+.addthis_button a {
+	margin:0;
+	padding:0 2px;
+	border: none;
+	text-decoration: none;
+	background: none;
+}
+
+.addthis_button a img {
+	vertical-align: text-bottom;
+}
+
+#addthis_services a {
+	text-decoration:none;
+	border:none;
+}

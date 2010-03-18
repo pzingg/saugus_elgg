@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{{title}}</title>
+{{metatags}}
+</head>
+<body>
+<div id="topnav">
+<p>Welcome {{userfullname}}</p>
+<ul>{{menu}}</ul>
+</div>
+<div id="rap">
+<div id="header">
+
+<h1><a href="{{url}}index.php">My Elgg Site</a></h1>
+<p>Personal Learning Landscape</p>
+
+</div>
+<div id="main">
+{{topmenu}}
+<table id="contentshell"><tr>
+<td id="content">
+{{messageshell}}
+ {{mainbody}}
+</td>
+<td id="sidebar">
+<ul>
+{{sidebar}}
+</ul>
+</td>
+</tr></table>
+<p id="footer">
+All work is licensed under a 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 License</a> unless otherwise noted.</p>
+</div>
+</div>
+</body>
+</html>
