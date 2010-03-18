@@ -65,7 +65,7 @@ END;
     
     foreach($folders as $folder_details) {
         
-        if (run("users:access_level_check",$folder_details->access) == true) {
+        if (($page_owner == $_SESSION['userid']) || (run("users:access_level_check",$folder_details->access) == true)) {
             $username = $owner_username;
             $ident = (int) $folder_details->ident;
             $name = get_access_description($folder_details->access);

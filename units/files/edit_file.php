@@ -78,6 +78,7 @@ END;
         $body .= run("metadata:edit",$file_id);
         
         $saveChanges = gettext("Save changes"); // gettext variable
+
         $body .= <<< END
                 
                 <tr>

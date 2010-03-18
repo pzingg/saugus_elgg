@@ -14,8 +14,10 @@ $weblog_offset = optional_param('weblog_offset',0,PARAM_INT);
 
 $friends = run("friends:get",array($page_owner));
 
-$where2 = "weblog = '$page_owner'";
-        
+//don't want to see my posts too'
+//$where2 = "weblog = '$page_owner'";
+$where2 = "";
+      
 if (!empty($friends)) {
     foreach($friends as $friend) {
         

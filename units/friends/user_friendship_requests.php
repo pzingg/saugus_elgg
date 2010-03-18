@@ -13,7 +13,7 @@ global $CFG;
             if ($pending_requests = get_records_sql('SELECT fr.ident AS request_id,u.*
                                                      FROM '.$CFG->prefix.'friends_requests fr LEFT JOIN '.$CFG->prefix.'users u ON u.ident = fr.owner
                                                      WHERE fr.friend = ? ORDER BY u.name ASC',array($page_owner))) {
-                $body = "<p>" . gettext("The following users would like to add you as a friend. They need your approval to do this (to change this setting, visit the 'account settings' page).") . "</p>";
+                $body .= "<p>" . gettext("The following users would like to add you as a friend. They need your approval to do this (to change this setting, visit the 'account settings' page).") . "</p>";
                     
                 foreach($pending_requests as $pending_user) {
                     
@@ -48,7 +48,7 @@ global $CFG;
                 }
                 
             } else {
-                $body = "<p>" . gettext("You have no pending friendship requests.") . "</p>";
+                $body .= "<p>" . gettext("You have no pending friendship requests.") . "</p>";
             }
             
             $run_result = templates_draw(array(
