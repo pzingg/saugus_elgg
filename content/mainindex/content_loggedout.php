@@ -30,7 +30,7 @@ if ($users = get_records_sql("SELECT DISTINCT u.*,i.filename AS iconfile, ".$db-
     
 $run_result .= "</p>";
 
-$run_result .= "<p>" . sprintf(gettext("If you like what you see, why not <a href=\"%s\">register for an account</a>?"), url . "_invite/register.php") . "</p>";
+if ($CFG->publicreg) $run_result .= "<p>" . sprintf(gettext("If you like what you see, why not <a href=\"%s\">register for an account</a>?"), url . "_invite/register.php") . "</p>";
 $run_result .= "<p>&nbsp;</p>";
 
 if ($news = get_record_sql("SELECT wp.* FROM ".$CFG->prefix."weblog_posts wp
