@@ -12,7 +12,7 @@
         $numberedList = gettext("A numbered list"); // gettext variable
         $body = <<< END
         
-    <img src="/_templates/leaves.jpg" width="300" height="225" alt="A test image" align="right" />
+    <img src="{{url}}_templates/leaves.jpg" width="300" height="225" alt="A test image" align="right" />
     <h1>$heading1</h1>
     <p>Paragraph text</p>
     <h2>$heading2</h2>
