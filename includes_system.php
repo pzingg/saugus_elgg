@@ -32,6 +32,9 @@
     
     // File repository
         include($CFG->dirroot . "units/files/main.php");
+        
+    // Owned Users - added by jklein - unrem to enable
+		include($CFG->dirroot . "units/ownedusers/main.php");
                 
     // Communities
         require($CFG->dirroot . "units/communities/main.php");
@@ -54,6 +57,7 @@
         require($CFG->dirroot . "units/xml/main.php");
         
     // Your Resources
+    	if ($CFG->resources_enabled)
         require($CFG->dirroot . "units/magpie/main.php");
         
 ?>
